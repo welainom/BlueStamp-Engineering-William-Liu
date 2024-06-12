@@ -6,6 +6,7 @@
 For my starter project, I chose to make a calculator. It is a simple four function calculator that can use decimals and goes up to six digits. This project involved a lot of soldering and connecting parts, and it was pretty challenging and took a lot of time.
 
 
+
 **Parts used:**
 - Monolithic Capacitor: Used for energy exchange and storage
 - 3V Battery: Power supply of the calculator
@@ -16,7 +17,11 @@ For my starter project, I chose to make a calculator. It is a simple four functi
 - Screws and Nuts: Fastens the parts together
 
 
+
+
 When the buttons detect a button press, they send an electrical signal to the STC Controller, and this controls the seven segment displays and displays your operations. A seven segment display allows numbers to be displayed by controlling current flow to each of seven segments, allowing many combinations to patterns to be displayed.
+
+
 
 
 **Challenges:**
