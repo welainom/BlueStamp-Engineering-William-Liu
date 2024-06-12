@@ -19,7 +19,7 @@ When the buttons detect a button press, they send an electrical signal to the ST
 **Challenges:**
 Despite this being a starter project, it still came with many challenges. Firstly, the large number of components that needed connecting required a lot of very precise soldering, which was a challenge. Additionally, the instructions were rather unclear, and I spent quite a long time figuring out which parts to solder and how to connect them. 
 
-![Headstone Image](William_L (1).jpg)
+![Headstone Image](William_L (1).jpg){ style="width:200px; height:300px;" }
 
 
 # Ball Tracking Robot
@@ -35,7 +35,7 @@ Despite this being a starter project, it still came with many challenges. Firstl
 
 **Replace the BlueStamp logo below with an image of yourself and your completed project. Follow the guide [here](https://tomcam.github.io/least-github-pages/adding-images-github-pages-site.html) if you need help.**
 
-![Headstone Image](logo.svg){: style="width:300px; height:200px;" }
+![Headstone Image](logo.svg)
   
 # Final Milestone
 
