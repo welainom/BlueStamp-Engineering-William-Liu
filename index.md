@@ -1,4 +1,7 @@
+# BlueStamp Engineering Portfolio
+
 # Calculator
+
 **Summary:**
 For my starter project, I chose to make a calculator. It is a simple four function calculator that can use decimals and goes up to six digits. This project involved a lot of soldering and connecting parts, and it was pretty challenging and took a lot of time.
 
