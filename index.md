@@ -19,7 +19,7 @@ When the buttons detect a button press, they send an electrical signal to the ST
 **Challenges:**
 Despite this being a starter project, it still came with many challenges. Firstly, the large number of components that needed connecting required a lot of very precise soldering, which was a challenge. Additionally, the instructions were rather unclear, and I spent quite a long time figuring out which parts to solder and how to connect them. 
 
-![Headstone Image](William_L.HEIC)
+![Image](William_L.HEIC)
 
 
 # Ball Tracking Robot
