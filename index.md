@@ -1,6 +1,6 @@
 # BlueStamp Engineering Portfolio
 
-# Calculator
+**Calculator:**
 
 **Summary:**
 For my starter project, I chose to make a calculator. It is a simple four function calculator that can use decimals and goes up to six digits. This project involved a lot of soldering and connecting parts, and it was pretty challenging and took a lot of time.
@@ -15,10 +15,15 @@ For my starter project, I chose to make a calculator. It is a simple four functi
 - Circuit board: Allows the connections to be possible
 - Screws and Nuts: Fastens the parts together
 
+
 When the buttons detect a button press, they send an electrical signal to the STC Controller, and this controls the seven segment displays and displays your operations. A seven segment display allows numbers to be displayed by controlling current flow to each of seven segments, allowing many combinations to patterns to be displayed.
+
 
 **Challenges:**
 Despite this being a starter project, it still came with many challenges. Firstly, the large number of components that needed connecting required a lot of very precise soldering, which was a challenge. Additionally, the instructions were rather unclear, and I spent quite a long time figuring out which parts to solder and how to connect them. 
+
+
+
 
 # Ball Tracking Robot
 <!--Replace this text with a brief description (2-3 sentences) of your project. This description should draw the reader in and make them interested in what you've built. You can include what the biggest challenges, takeaways, and triumphs from completing the project were. As you complete your portfolio, remember your audience is less familiar than you are with all that your project entails!-->
