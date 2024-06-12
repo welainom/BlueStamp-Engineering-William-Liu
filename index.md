@@ -1,13 +1,20 @@
 # Calculator
 Summary:
 For my starter project, I chose to make a calculator. It is a simple four function calculator that can use decimals and goes up to six digits. This project involved a lot of soldering and connecting parts, and it was pretty challenging and took a lot of time.
+
+Parts used:
+- Monolithic Capacitor: Used for energy exchange and storage
+- 3V Battery: Power supply of the calculator
+- Buttons and Button Caps: Detects presses and sends signals to the STC controller
+- Seven Segment Displays: Allows numbers to be displayed
+- STC Controller: Microchip, performs operations fast and using little power
+- Circuit board: Allows the connections to be possible
+- Screws and Nuts: Fastens the parts together
 <!--Replace this text with a brief description (2-3 sentences) of your project. This description should draw the reader in and make them interested in what you've built. You can include what the biggest challenges, takeaways, and triumphs from completing the project were. As you complete your portfolio, remember your audience is less familiar than you are with all that your project entails!-->
 
-You should comment out all portions of your portfolio that you have not completed yet, as well as any instructions:
-```HTML 
+<!-- You should comment out all portions of your portfolio that you have not completed yet, as well as any instructions: -->
 <!--- This is an HTML comment in Markdown -->
 <!--- Anything between these symbols will not render on the published site -->
-```
 
 | **Engineer** | **School** | **Area of Interest** | **Grade** |
 |:--:|:--:|:--:|:--:|
