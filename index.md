@@ -25,14 +25,14 @@ After completing my start project, I will start planning my main project.
 
 ![Headstone Image](William_L (1).jpg)
 
-
+<!--
 # Ball Tracking Robot
 <!--Replace this text with a brief description (2-3 sentences) of your project. This description should draw the reader in and make them interested in what you've built. You can include what the biggest challenges, takeaways, and triumphs from completing the project were. As you complete your portfolio, remember your audience is less familiar than you are with all that your project entails!-->
 
 <!-- You should comment out all portions of your portfolio that you have not completed yet, as well as any instructions: -->
 <!--- This is an HTML comment in Markdown -->
 <!--- Anything between these symbols will not render on the published site -->
-
+<!--
 | **Engineer** | **School** | **Area of Interest** | **Grade** |
 |:--:|:--:|:--:|:--:|
 | William L | Monta Vista High School | Computer Science | Incoming Sophomore
@@ -114,4 +114,4 @@ One of the best parts about Github is that you can view how other people set up 
 - [Example 2](https://sviatil0.github.io/Sviatoslav_BSE/)
 - [Example 3](https://arneshkumar.github.io/arneshbluestamp/)
 
-To watch the BSE tutorial on how to create a portfolio, click here.
+To watch the BSE tutorial on how to create a portfolio, click here. -->
