@@ -35,7 +35,7 @@ Despite this being a starter project, it still came with many challenges. Firstl
 
 **Replace the BlueStamp logo below with an image of yourself and your completed project. Follow the guide [here](https://tomcam.github.io/least-github-pages/adding-images-github-pages-site.html) if you need help.**
 
-![Headstone Image](logo.svg)
+![Headstone Image](logo.svg){: style="width:300px; height:200px;" }
   
 # Final Milestone
 
