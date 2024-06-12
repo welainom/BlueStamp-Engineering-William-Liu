@@ -15,7 +15,7 @@ For my starter project, I chose to make a calculator. It is a simple four functi
 - Screws and Nuts: Fastens the parts together
 
 **How it Works:**
-When the buttons detect a button press, they send an electrical signal to the STC Controller, and this controls the seven segment displays and displays your operations. A seven segment display allows numbers to be displayed by controlling current flow to each of seven segments, allowing many combinations to patterns to be displayed.
+The STC Controller has many small pins attached to the sides, and whenever a button detects a button press, it sends a signal to one of the pins. Depending on which pins are on and which pins are off, the STC Controller will send a different signal to the seven segment displays and display your operations. A seven segment display allows numbers to be displayed by controlling current flow to each of seven segments, allowing many combinations of patterns to be displayed.
 
 **Challenges:**
 Despite this being a starter project, it still came with many challenges. Firstly, the large number of components that needed connecting required a lot of very precise soldering, which was a challenge. Additionally, the instructions were rather unclear, and I spent quite a long time figuring out which parts to solder and how to connect them. 
