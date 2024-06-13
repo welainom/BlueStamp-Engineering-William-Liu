@@ -1,4 +1,4 @@
-# BlueStamp Engineering Portfolio
+# Ball Tracking Robot
 
 | **Engineer** | **School** | **Area of Interest** | **Grade** |
 |:--:|:--:|:--:|:--:|
