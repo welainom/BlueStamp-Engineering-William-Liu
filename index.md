@@ -1,8 +1,13 @@
-# Ball Tracking Robot
-
 | **Engineer** | **School** | **Area of Interest** | **Grade** |
 |:--:|:--:|:--:|:--:|
 | William L | Monta Vista High School | Computer Science | Incoming Sophomore
+
+![Headstone Image](William_L (1).jpg)
+
+# Ball Tracking Robot:
+
+I chose the Ball Tracking Robot as my main project. It uses a computer vision Python library called OpenCv to detect if the ball is present within the camera frame, and then it controls motors and navigates the robot towards the ball. The robot uses a Raspberry Pi minicomputer, cameras, DC motors, and ultrasonic sensors to detect objects that might cause a crash.
+
 
 # Calculator:
 
@@ -23,13 +28,14 @@ For my starter project, I chose to make a calculator. It is a simple four functi
 **How it Works:**
 The STC Controller has many small pins attached to the sides, and whenever a button detects a button press, it sends a signal to one of the pins. Depending on which pins are on and which pins are off, the STC Controller will send a different signal to the seven segment displays and display your operations. A seven segment display allows numbers to be displayed by controlling current flow to each of seven segments, allowing many combinations of patterns to be displayed.
 
+![Headstone Image](sevensegment.jpeg)
+
 **Challenges:**
 Despite this being a starter project, it still came with many challenges. Firstly, the large number of components that needed connecting required a lot of very precise soldering, which was a challenge. Additionally, the instructions were rather unclear, and I spent quite a long time figuring out which parts to solder and how to connect them. 
 
 **What's Next:**
 After completing my start project, I will start planning my main project.
 
-![Headstone Image](William_L (1).jpg)
 
 <!--
 # Ball Tracking Robot
