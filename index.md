@@ -30,6 +30,8 @@ The STC Controller has many small pins attached to the sides, and whenever a but
 
 ![Headstone Image](sevensegment.jpeg)
 
+Figure 1: This is a diagram of a seven segment display. Each switch (lettered A-DP) controls the corresponding segment on the display 
+
 **Challenges:**
 Despite this being a starter project, it still came with many challenges. Firstly, the large number of components that needed connecting required a lot of very precise soldering, which was a challenge. Additionally, the instructions were rather unclear, and I spent quite a long time figuring out which parts to solder and how to connect them. 
 
