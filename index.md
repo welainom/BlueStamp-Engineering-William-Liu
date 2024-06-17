@@ -6,7 +6,7 @@ I chose the Ball Tracking Robot as my main project. It uses a computer vision Py
 |:--:|:--:|:--:|:--:|
 | William L | Monta Vista High School | Computer Science | Incoming Sophomore
 
-![Headstone Image](William_L (1).jpg)
+![Headstone Image](William_L (2).jpg)
 
 
 # Calculator:
@@ -30,7 +30,7 @@ The STC Controller has many small pins attached to the sides, and whenever a but
 
 ![Headstone Image](sevensegment.jpeg)
 
-This is a diagram of a seven segment display. Each switch (lettered A-DP) controls the corresponding segment on the display by cutting off current flow to the segment.
+This is a diagram of a seven segment display. Each switch (lettered A-DP) controls the corresponding segment on the display by allowing current to flow to that segment.
 
 **Challenges:**
 Despite this being a starter project, it still came with many challenges. Firstly, the large number of components that needed connecting required a lot of very precise soldering, which was a challenge. Additionally, the instructions were rather unclear, and I spent quite a long time figuring out which parts to solder and how to connect them. 
