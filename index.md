@@ -6,7 +6,7 @@ I chose the Ball Tracking Robot as my main project. It uses a computer vision Py
 |:--:|:--:|:--:|:--:|
 | William L | Monta Vista High School | Computer Science | Incoming Sophomore
 
-![Headstone Image](William_L (2).jpg)
+![Headstone Image](William_L (3).jpg)
 
 
 # Calculator:
