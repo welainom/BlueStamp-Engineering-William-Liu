@@ -29,6 +29,7 @@ For my starter project, I chose to make a calculator. It is a simple four functi
 The STC Controller has many small pins attached to the sides, and whenever a button is pressed, it sends a signal to one of the pins. Depending on which pins are on and which pins are off, the STC Controller will send a different signal to the seven segment displays and display your operations. A seven segment display allows numbers to be displayed by controlling current flow to each of seven segments, allowing many combinations of patterns to be displayed.
 
 ![Headstone Image](sevensegment.jpeg)
+(forum.arduino.cc)
 
 This is a diagram of a seven segment display. Each switch (lettered A-DP) controls the corresponding segment on the display by allowing current to flow to that segment.
 
