@@ -26,6 +26,8 @@ The Raspberry Pi is the central controller of the whole project, and it controls
 ![Headstone Image](resized rpi setup.gif)
 ![Headstone Image](hbridge (1).jpg)
 
+Left: Raspberry Pi 4, Right: L298H Driver Board
+
 **Challenges:**
 When completing this milestone, I faced a number of challenges. Firstly, connecting the Raspberry Pi to my computer took a whole day of trial and error until it finally connected. Additionally, the wiring was a challenge. It took me a while to find out which output and input pins on the L298H Driver Board corresponded with which motor. After I finished these tasks, writing code was much simpler. 
 
