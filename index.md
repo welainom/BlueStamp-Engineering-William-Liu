@@ -22,7 +22,8 @@ The Raspberry Pi is the central controller of the whole project, and it controls
 - L298H Driver Board: A H-bridge motor driver board that is used to connect the Pi to the DC motors. A H-bridge is an electronic circuit that switches the polarity of a voltage.
 - 6V Power Source: Supplies the L298H driver board with power. 
 - Portable Battery Source: Supplies the Raspberry Pi with power.
-  
+
+<img src="rpisetup.gif" width = "300" height = "300> 
 ![Headstone Image](rpisetup.gif)
 ![Headstone Image](hbridge.jpg)
 
