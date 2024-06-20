@@ -8,6 +8,29 @@ I chose the Ball Tracking Robot as my main project. It uses a computer vision Py
 
 ![Headstone Image](William_L (3).jpg)
 
+# First Milestone:
+
+**Summary:**
+For my first milestone, I made the robot move forward and turn on command. First, I built the frame for my robot, attaching the wheels and motors to the base. Second, I connected the L298H Driver Board, the DC Motors, and the Raspberry Pi. Lastly, I wrote testing code on the Raspberry Pi to make the robot move forward and turn.
+
+**How it Works:**
+The Raspberry Pi is the central controller of the whole project, and it controls the L298H Driver Board, which controls the DC Motors. Each input pin on the L298H Driver Board is connected to a General Purpose Input Output (GPIO) pin on the Raspberry Pi, and the output pins are soldered to the DC Motors. In my code, I specify which pins I want to run GPIO operations on, and these are the pins controlling the Driver Board. This way, I can control the motors using the raspberry pi. 
+
+**Parts Used:**
+- Raspberry Pi 4: A small minicomputer that controls everything in this project. Wired everything to this and used it to control power to the motors.
+- DC Motors: Two electrical motors that use Direct Current (DC) to produce mechanical force. Uses an electromagnet to change the direction of current in the motor.
+- L298H Driver Board: A H-bridge motor driver board that is used to connect the Pi to the DC motors. A H-bridge is an electronic circuit that switches the polarity of a voltage.
+- 6V Power Source: Supplies the L298H driver board with power. 
+- Portable Battery Source: Supplies the Raspberry Pi with power.
+  
+![Headstone Image](rpisetup.gif)
+![Headstone Image](hbridge.jpg)
+
+**Challenges:**
+When completing this milestone, I faced a number of challenges. Firstly, connecting the Raspberry Pi to my computer took a whole day of trial and error until it finally connected. Additionally, the wiring was a challenge. It took me a while to find out which output and input pins on the L298H Driver Board corresponded with which motor. After I finished these tasks, writing code was much simpler. 
+
+**What’s Next:**
+After this, I will work on the color detection and ball tracking component of this project, and this seems like more coding, which I am looking forward to. 
 
 # Calculator:
 
