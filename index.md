@@ -23,8 +23,7 @@ The Raspberry Pi is the central controller of the whole project, and it controls
 - 6V Power Source: Supplies the L298H driver board with power. 
 - Portable Battery Source: Supplies the Raspberry Pi with power.
 
-<img src="rpisetup.gif" width = "300" height = "300> 
-![Headstone Image](rpisetup.gif)
+![Headstone Image](resized rpi setup.gif)
 ![Headstone Image](hbridge.jpg)
 
 **Challenges:**
