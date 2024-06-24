@@ -70,7 +70,88 @@ When completing this milestone, I faced a number of challenges. Firstly, connect
 **What’s Next:**
 After this, I will work on the color detection and ball tracking component of this project, and this seems like more coding, which I am looking forward to. 
 
-# Calculator:
+# Code:
+
+**First Milestone Code**
+
+```python
+import RPi.GPIO as GPIO
+import cv2
+import numpy as np
+from time import sleep
+
+GPIO.setwarnings(False)
+
+# Left Motor
+in1 = 17 # Forward 
+in2 = 27 # Backward
+ena = 4
+
+# Right Motor
+in3 = 2 # Foward 
+in4 = 3 # Backward
+enb = 14
+
+GPIO.setmode(GPIO.BCM)
+
+GPIO.setup(in1, GPIO.OUT)
+GPIO.setup(in2, GPIO.OUT)
+GPIO.setup(ena, GPIO.OUT)
+
+GPIO.setup(in3, GPIO.OUT)
+GPIO.setup(in4, GPIO.OUT)
+GPIO.setup(enb, GPIO.OUT)
+
+power_a = GPIO.PWM(ena, 20)
+power_a.start(60)
+
+power_b = GPIO.PWM(enb, 20)
+power_b.start(60)
+
+def forward():
+    GPIO.output(in1, GPIO.HIGH)
+    GPIO.output(in2, GPIO.LOW)
+    
+    GPIO.output(in3, GPIO.HIGH)
+    GPIO.output(in4, GPIO.LOW)
+
+def stop():
+    GPIO.output(in1, GPIO.LOW)
+    GPIO.output(in2, GPIO.LOW)
+    
+    GPIO.output(in3, GPIO.LOW)
+    GPIO.output(in4, GPIO.LOW)
+    
+def turn_left():
+    GPIO.output(in1, GPIO.LOW)
+    GPIO.output(in2, GPIO.HIGH)
+    
+    GPIO.output(in3, GPIO.HIGH)
+    GPIO.output(in4, GPIO.LOW)
+    
+def turn_right():
+    GPIO.output(in1, GPIO.HIGH)
+    GPIO.output(in2, GPIO.LOW)
+    
+    GPIO.output(in3, GPIO.LOW)
+    GPIO.output(in4, GPIO.HIGH)
+    
+
+while(True):
+	userInput = input()
+	
+	if (userInput == 'c'):
+		forward()
+	if (userInput == 'l'):
+		turn_left()
+	if (userInput == 'r'):
+		turn_right()
+	if (userInput == 'x'):
+		stop()
+
+```
+
+# Starter Project: Calculator:
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/q9Mwomvro4c?si=zozlNiDIa9Zl9xtW" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
