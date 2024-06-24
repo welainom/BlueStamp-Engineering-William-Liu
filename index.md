@@ -6,7 +6,7 @@ I chose the Ball Tracking Robot as my main project. It uses a computer vision Py
 |:--:|:--:|:--:|:--:|
 | William L | Monta Vista High School | Computer Science | Incoming Sophomore
 
-![Headstone Image](William_L (3).jpg)
+![Headstone Image](William_L (1).jpg)
 
 # First Milestone:
 
@@ -72,7 +72,7 @@ After this, I will work on the color detection and ball tracking component of th
 
 # Code:
 
-**First Milestone Code**
+**First Milestone Code:**
 
 ```python
 import RPi.GPIO as GPIO
