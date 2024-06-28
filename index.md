@@ -449,36 +449,6 @@ while(True):
 
 ```
 
-# Starter Project - Calculator:
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/q9Mwomvro4c?si=zozlNiDIa9Zl9xtW" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
-**Summary:**
-For my starter project, I chose to make a calculator. It is a simple four function calculator that can use decimals and goes up to six digits. This project involved a lot of soldering and connecting parts, and it was pretty challenging and took a lot of time.
-
-**Parts used:**
-- Monolithic Capacitor: Used for energy exchange and storage
-- 3V Battery: Power supply of the calculator
-- Buttons and Button Caps: Detects presses and sends signals to the STC controller
-- Seven Segment Displays: Allows numbers to be displayed
-- STC Controller: Microchip, performs operations fast and using little power
-- Circuit board: Allows the connections to be possible
-- Screws and Nuts: Fastens the parts together
-
-**How it Works:**
-The STC Controller has many small pins attached to the sides, and whenever a button is pressed, it sends a signal to one of the pins. Depending on which pins are on and which pins are off, the STC Controller will send a different signal to the seven segment displays and display your operations. A seven segment display allows numbers to be displayed by controlling current flow to each of seven segments, allowing many combinations of patterns to be displayed.
-
-![Headstone Image](sevensegment.jpeg)
-(forum.arduino.cc)
-
-This is a diagram of a seven segment display. Each switch (lettered A-DP) controls the corresponding segment on the display by allowing current to flow to that segment.
-
-**Challenges:**
-Despite this being a starter project, it still came with many challenges. Firstly, the large number of components that needed connecting required a lot of very precise soldering, which was a challenge. Additionally, the instructions were rather unclear, and I spent quite a long time figuring out which parts to solder and how to connect them. 
-
-**What's Next:**
-After completing my start project, I will start planning my main project.
-
 # Bill of Materials:
 
 | **Part** | **Note** | **Price** | **Link** |
@@ -509,6 +479,36 @@ After completing my start project, I will start planning my main project.
 |:--:|:--:|:--:|:--:|
 | Soldering Kit | Soldering kit for motor connections (and solderable breadboard, optional).  | $13.59 | <a href="https://www.amazon.com/Soldering-Interchangeable-Adjustable-Temperature-Enthusiast/dp/B087767KNW/ref=sr_1_5?crid=1QYWI5SBQAPH0&keywords=soldering+kit&qid=1689900771&sprefix=soldering+kit%2Caps%2C169&sr=8-5"> <ins>Link</ins> </a> |
 |:--:|:--:|:--:|:--:|
+
+# Starter Project - Calculator:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/q9Mwomvro4c?si=zozlNiDIa9Zl9xtW" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+**Summary:**
+For my starter project, I chose to make a calculator. It is a simple four function calculator that can use decimals and goes up to six digits. This project involved a lot of soldering and connecting parts, and it was pretty challenging and took a lot of time.
+
+**Parts used:**
+- Monolithic Capacitor: Used for energy exchange and storage
+- 3V Battery: Power supply of the calculator
+- Buttons and Button Caps: Detects presses and sends signals to the STC controller
+- Seven Segment Displays: Allows numbers to be displayed
+- STC Controller: Microchip, performs operations fast and using little power
+- Circuit board: Allows the connections to be possible
+- Screws and Nuts: Fastens the parts together
+
+**How it Works:**
+The STC Controller has many small pins attached to the sides, and whenever a button is pressed, it sends a signal to one of the pins. Depending on which pins are on and which pins are off, the STC Controller will send a different signal to the seven segment displays and display your operations. A seven segment display allows numbers to be displayed by controlling current flow to each of seven segments, allowing many combinations of patterns to be displayed.
+
+![Headstone Image](sevensegment.jpeg)
+(forum.arduino.cc)
+
+This is a diagram of a seven segment display. Each switch (lettered A-DP) controls the corresponding segment on the display by allowing current to flow to that segment.
+
+**Challenges:**
+Despite this being a starter project, it still came with many challenges. Firstly, the large number of components that needed connecting required a lot of very precise soldering, which was a challenge. Additionally, the instructions were rather unclear, and I spent quite a long time figuring out which parts to solder and how to connect them. 
+
+**What's Next:**
+After completing my start project, I will start planning my main project.
 
 <!--
 # Ball Tracking Robot
