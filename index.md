@@ -102,6 +102,8 @@ I spent almost a whole day trying to figure out what was wrong with one of the u
 **What's Next:**
 After this, I will put all my code together and allow the robot to indefinitely search for the ball.
 
+**Schematic Diagram:**
+
 ![Headstone Image](schematic.png)
 
 Ultrasonic sensor 1:
