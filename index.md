@@ -102,6 +102,26 @@ I spent almost a whole day trying to figure out what was wrong with one of the u
 **What's Next:**
 After this, I will put all my code together and allow the robot to indefinitely search for the ball.
 
+![Headstone Image](schematic.png)
+
+Ultrasonic sensor 1:
+- TRIG to GPIO 23
+- ECHO to GPIO 24
+Ultrasonic sensor 2:
+- TRIG to GPIO 16
+- ECHO to GPIO 26
+Ultrasonic sensor 3:
+- TRIG to GPIO 5
+- ECHO to GPIO 6:
+
+H-bridge:
+- IN1 to GPIO 17
+- IN2 to GPIO 27
+- ENA to GPIO 4
+- IN3 to GPIO 2 
+- IN4 to GPIO 3
+- ENB to GPIO 14
+
 # First Milestone:
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/nw1HndpI-dI?si=KehLbm4MAK9ZHV8J" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -163,26 +183,6 @@ When completing this milestone, I faced a number of challenges. Firstly, connect
 
 **What’s Next:**
 After this, I will work on the color detection and ball tracking component of this project, and this seems like more coding, which I am looking forward to. 
-
-![Headstone Image](schematic.png)
-
-Ultrasonic sensor 1:
-- TRIG to GPIO 23
-- ECHO to GPIO 24
-Ultrasonic sensor 2:
-- TRIG to GPIO 16
-- ECHO to GPIO 26
-Ultrasonic sensor 3:
-- TRIG to GPIO 5
-- ECHO to GPIO 6:
-
-H-bridge:
-- IN1 to GPIO 17
-- IN2 to GPIO 27
-- ENA to GPIO 4
-- IN3 to GPIO 2 
-- IN4 to GPIO 3
-- ENB to GPIO 14
 
 # Code:
 
