@@ -8,6 +8,100 @@ I chose the Ball Tracking Robot as my main project. It uses a computer vision Py
 
 ![Headstone Image](William_L (1).jpg)
 
+# Second Milstone:
+
+**Summary:**
+For my second milestone, I implemented the camera and the color detection portion of my project, allowing the robot to see the red color of the ball using OpenCV. Also, I added ultrasonic sensors on the front of the robot to detect if it is too close to the ball or any other object.
+
+**How it Works:**
+If the camera detects blobs of red pixels with area greater than 20000 square pixels and less than 100000 square pixels. If one is found,  it will move forward until the area of the ball is greater than 200000 or an ultrasonic sensor detects a distance less than 7 cm. In which case, it will move backwards.
+
+```python
+def find_red(frame):
+    hsv_roi = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+    
+    lower_red1 = np.array([150, 140, 1])
+    upper_red1 = np.array([190, 255, 255])
+    
+    mask1 = cv2.inRange(hsv_roi, lower_red1, upper_red1)
+    
+    mask = mask1
+    mask = cv2.erode(mask, np.ones((3, 3), np.uint8))
+    mask = cv2.dilate(mask, np.ones((8, 8), np.uint8))
+    
+    cv2.imshow('mask', mask)  
+    return mask
+```
+
+The function above isolates the red pixels detected by the camera, and returns a mask of the original video that has white pixels where the red is and black everywhere else. The lower_red1 and upper_red1 variables are the range of red colors that we want to detect. The cv2.inRange() function isolates the range of red colors in the frame. When cv2.erode() and cv2.dilate() are used together, they help to remove small objects from the foreground and smooth out larger objects, allowing for a more refined image.
+
+```python
+def find_blob(blob):
+    largest_contour = 0
+    cont_idx = 0
+    contours, hierarchy = cv2.findContours(blob,  cv2.RETR_CCOMP, cv2.CHAIN_APPROX_SIMPLE)
+
+    for idx, contour in enumerate(contours):
+        area=cv2.contourArea(contour)
+        if (area >largest_contour) :
+            largest_contour=area
+            cont_index=idx
+                    
+    r=(0,0,2,2)
+    
+    if len(contours) > 0:
+        r = cv2.boundingRect(contours[cont_index])
+     
+    return r,largest_contour
+```
+
+This function actually finds the blob of white pixels from the mask that the find_red function returns. The input is the mask of the red pixels, and it returns r, the bounding rectangle of the contour, (x, y, w, h). (x, y) is the top left corner, and (w, h) is the width and height of the rectangle. largest_contour is the area of the largest contour found in the image.
+
+```python
+def find_distance(trig, echo):
+    start = 0
+    stop = 0
+	
+    GPIO.setup(trig, GPIO.OUT)
+    GPIO.setup(echo, GPIO.IN)
+	
+    GPIO.output(trig, GPIO.LOW)
+    time.sleep(0.01)
+
+    GPIO.output(trig, GPIO.HIGH)
+    time.sleep(0.00001)
+    GPIO.output(trig, GPIO.LOW)
+    begin = time.time()
+    while GPIO.input(echo) == 0 and time.time() < begin + 0.05:
+        start = time.time()
+    while GPIO.input(echo) == 1 and time.time() < begin + 0.1:
+        stop = time.time()
+
+    elapsed = stop - start
+    distance = elapsed * 34300
+    distance = distance / 2
+    distance = round(distance, 2)
+
+    return distance
+```
+
+This function returns the distance detected in an ultrasonic sensor given the trigger and echo pins on the raspberry pi. It sets the output of the sensor to high for a very short amount of time, allowing it to emit an ultrasound signal. “start” and “stop” keep track of when the echo receives a signal. The elapsed time is multiplied by 34300 and divided by two to account for the speed of sound and because the signal hits the object and travels back.
+
+![Headstone Image](hcsro4.jpeg)
+
+This is a diagram of an HC-SR04 sensor. The cylinder object on the left transmits the signals and the one on the right receives the signals. VCC and GND connect to power and ground respectively, and Trig and Echo are connected to pins on the raspberry pi. When Trig is set to HIGH, it emits the ultrasonic sound pulses. Echo is set to an input pin, so when it receives the signal, it will emit a pulse. 
+
+**Parts Used:**
+- Raspberry Pi camera module: A 12 megapixel camera that is compatible with Raspberry Pi 4
+- HC-SR04 sensors: Ultrasonic sensors used to detect distances of unwanted objects
+- Breadboard: Connecting all the components together and supplying power to all three ultrasonic sensors.
+
+**Challenges:**
+I spent almost a whole day trying to figure out what was wrong with one of the ultrasonic sensors, only to realize that it was burned out, and by simply replacing it, I solved the issue. Additionally, the template code was outdated, and I needed to use a library named picamera2 to achieve the same effect. 
+
+**What's Next:**
+After this, I will put all my code together and allow the robot to indefinitely search for the ball.
+
 # First Milestone:
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/nw1HndpI-dI?si=KehLbm4MAK9ZHV8J" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -69,6 +163,26 @@ When completing this milestone, I faced a number of challenges. Firstly, connect
 
 **What’s Next:**
 After this, I will work on the color detection and ball tracking component of this project, and this seems like more coding, which I am looking forward to. 
+
+![Headstone Image](schematic.png)
+
+Ultrasonic sensor 1:
+- TRIG to GPIO 23
+- ECHO to GPIO 24
+Ultrasonic sensor 2:
+- TRIG to GPIO 16
+- ECHO to GPIO 26
+Ultrasonic sensor 3:
+- TRIG to GPIO 5
+- ECHO to GPIO 6:
+
+H-bridge:
+- IN1 to GPIO 17
+- IN2 to GPIO 27
+- ENA to GPIO 4
+- IN3 to GPIO 2 
+- IN4 to GPIO 3
+- ENB to GPIO 14
 
 # Code:
 
