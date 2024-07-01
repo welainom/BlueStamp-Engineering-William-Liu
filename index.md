@@ -8,6 +8,68 @@ I chose the Ball Tracking Robot as my main project. It uses a computer vision Py
 
 ![Headstone Image](William_L (1).jpg)
 
+# Third Milestone:
+
+**Summary:**
+For my third milestone, I completed my project, allowing the robot to infinitely search for the ball.
+
+**How It Works:**
+This milestone was mostly a coding milstone, basically joining together all the systems that I created in the past milstones. I allowed the robot to move based on the input from the camera and the ultrasonic sensors.
+
+```python
+while True:
+    video = picam.capture_array()
+    red_pixels = find_red(video)
+    loct, area = find_blob(red_pixels)
+    x, y, w, h = loct
+
+    left = find_distance(TRIG_L, ECHO_L)
+    center = find_distance(TRIG_C, ECHO_C)
+    right = find_distance(TRIG_R, ECHO_R)
+    min_distance = min(left, center, right)
+    area = w*h
+    print("area:", area, "center x:", center_x, "center y:", center_y)
+    
+    simg2 = cv2.rectangle(red_pixels, (x,y), (x+w,y+h), 255,2)
+    cv2.circle(red_pixels,(int(center_x),int(center_y)),3,(0,110,255),-1)
+    cv2.imshow('mask', red_pixels)
+    if area > 200000 or min_distance < 7:
+        print("object too close, reversing")
+        reverse()
+    elif 20000 < area and area < 100000:
+        center_x = x + (w)/2
+        center_y = y + (h)/2
+        forward()
+        print("ball found, moving forward")
+    elif 100000 < area and area < 200000:
+        print("ball found, stopped")
+        stop() 
+    elif center_x > right_range:
+        print("ball not found, turning right")
+        turn_right()
+        time.sleep(0.2)
+        stop()
+    elif center_x < left_range:
+        print("ball not found, turning left")
+        turn_left()
+        time.sleep(0.2)
+        stop()
+    else:
+        stop()
+        
+    if cv2.waitKey(1) == ord('q'):
+        break
+        
+cv2.destroyAllWindows()
+```
+This code is the main part of my project. Every time the loop runs, it captures the input from the camera, and uses the find_red() and find_blob() functions to process it and isolate the red pixels. Then, it calculates the area of the red pixels found. It also takes the inputs from each ultrasonic sensor using the calculate_distance() function. If this area is greater than 200,000 or if the minimum distance detected by the ultrasonic sensors is less than 7 cms, this means either the ball or another object is too close to the robot. In this case, it will move backwards to prevent collision. If the area of the red pixels is in between 20,000 and 100,000, then the robot will move forward towards the ball. If the area is between 100,000 and 200,000, then the robot will stop moving, and park in front of the ball. The code is also constantly tracking the center coordinates of the ball, and if these coordinates are less than a certain threshold or greater than a certain threshold, the robot will turn left or right until the ball is found. If none of these conditions are met, the robot will stop moving. 
+
+**Challenges:**
+Overall, this milestone was pretty smooth, but one thing that was challenging was figuring out the order that the robot should process the inputs in.
+
+**What's Next:**
+After this, I am going to brainstorm possible modifications I can make to make my project even better.
+
 # Second Milstone:
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/3c_5SvEc2xs?si=PZL8ljuQCZalwna-" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -189,6 +251,212 @@ When completing this milestone, I faced a number of challenges. Firstly, connect
 After this, I will work on the color detection and ball tracking component of this project, and this seems like more coding, which I am looking forward to. 
 
 # Code:
+
+**Third Milestone Code:**
+```python
+import RPi.GPIO as GPIO
+import cv2
+import numpy as np
+from picamera2 import Picamera2
+import time
+
+# Set up PiCamera
+picam = Picamera2()
+picam.preview_configuration.main.size=(640, 360)
+picam.preview_configuration.main.format="RGB888"
+picam.preview_configuration.align()
+picam.configure("preview")
+picam.start()
+
+#GPIO Setup
+GPIO.setwarnings(False)
+# Left Motor
+in1 = 17 # Forward 
+in2 = 27 # Backward
+ena = 4
+# Right Motor
+in3 = 2 # Foward 
+in4 = 3 # Backward
+enb = 14
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(in1, GPIO.OUT)
+GPIO.setup(in2, GPIO.OUT)
+GPIO.setup(ena, GPIO.OUT)
+GPIO.setup(in3, GPIO.OUT)
+GPIO.setup(in4, GPIO.OUT)
+GPIO.setup(enb, GPIO.OUT)
+
+power_a = GPIO.PWM(ena, 100)
+power_a.start(60)
+
+power_b = GPIO.PWM(enb, 100)
+power_b.start(60)
+
+TRIG_L = 23
+ECHO_L = 24
+TRIG_C = 16
+ECHO_C = 26
+TRIG_R = 5
+ECHO_R = 6
+
+GPIO.setup(TRIG_L, GPIO.OUT)
+GPIO.setup(ECHO_L, GPIO.IN)
+GPIO.setup(TRIG_C, GPIO.OUT)
+GPIO.setup(ECHO_C, GPIO.IN)
+GPIO.setup(TRIG_R, GPIO.OUT)
+GPIO.setup(ECHO_R, GPIO.IN)
+
+GPIO.output(TRIG_L, GPIO.LOW)
+GPIO.output(TRIG_C, GPIO.LOW)
+GPIO.output(TRIG_R, GPIO.LOW)
+time.sleep(1)
+
+def find_distance(trig, echo):
+    start = 0
+    stop = 0
+	
+    GPIO.setup(trig, GPIO.OUT)
+    GPIO.setup(echo, GPIO.IN)
+	
+    GPIO.output(trig, GPIO.LOW)
+    time.sleep(0.01)
+	
+    GPIO.output(trig, GPIO.HIGH)
+    time.sleep(0.00001)
+    GPIO.output(trig, GPIO.LOW)
+    begin = time.time()
+    while GPIO.input(echo) == 0 and time.time() < begin + 0.05:
+        start = time.time()
+    while GPIO.input(echo) == 1 and time.time() < begin + 0.1:
+        stop = time.time()
+
+    elapsed = stop - start
+    distance = elapsed * 34300
+    distance = distance / 2
+    distance = round(distance, 2)
+	
+    return distance
+
+def forward():
+    GPIO.output(in1, GPIO.HIGH)
+    GPIO.output(in2, GPIO.LOW)
+	
+    GPIO.output(in3, GPIO.HIGH)
+    GPIO.output(in4, GPIO.LOW)
+
+def reverse():
+    GPIO.output(in1, GPIO.LOW)
+    GPIO.output(in2, GPIO.HIGH)
+    
+    GPIO.output(in3, GPIO.LOW)
+    GPIO.output(in4, GPIO.HIGH)
+
+def stop():
+    GPIO.output(in1, GPIO.LOW)
+    GPIO.output(in2, GPIO.LOW)
+    
+    GPIO.output(in3, GPIO.LOW)
+    GPIO.output(in4, GPIO.LOW)
+    
+def turn_left():
+    GPIO.output(in1, GPIO.LOW)
+    GPIO.output(in2, GPIO.HIGH)
+    GPIO.output(in3, GPIO.HIGH)
+    GPIO.output(in4, GPIO.LOW)
+    
+def turn_right():
+    GPIO.output(in1, GPIO.HIGH)
+    GPIO.output(in2, GPIO.LOW)
+    GPIO.output(in3, GPIO.LOW)
+    GPIO.output(in4, GPIO.HIGH)
+    
+def find_red(frame):
+    hsv_roi = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+    
+    lower_red1 = np.array([150, 140, 1])
+    upper_red1 = np.array([190, 255, 255])
+    
+    mask1 = cv2.inRange(hsv_roi, lower_red1, upper_red1)
+    
+    mask = mask1
+    
+    mask = cv2.erode(mask, np.ones((3, 3), np.uint8))
+    mask = cv2.dilate(mask, np.ones((8, 8), np.uint8))
+    
+    # cv2.imshow('mask', mask)  
+    
+    return mask
+    
+def find_blob(blob):
+    largest_contour = 0
+    cont_idx = 0
+    contours, hierarchy = cv2.findContours(blob, cv2.RETR_CCOMP, cv2.CHAIN_APPROX_SIMPLE)
+    
+    for idx, contour in enumerate(contours):
+        area = cv2.contourArea(contour)
+        if (area > largest_contour):
+            largest_contour = area
+            cont_index = idx
+                    
+    r = (0, 0, 2, 2)
+    
+    if len(contours) > 0:
+        r = cv2.boundingRect(contours[cont_index])
+     
+    return r, largest_contour
+
+center_x = 0
+center_y = 0
+left_range = 100
+right_range = 540
+
+while True:
+    video = picam.capture_array()
+    red_pixels = find_red(video)
+    loct, area = find_blob(red_pixels)
+    x, y, w, h = loct
+
+    left = find_distance(TRIG_L, ECHO_L)
+    center = find_distance(TRIG_C, ECHO_C)
+    right = find_distance(TRIG_R, ECHO_R)
+    min_distance = min(left, center, right)
+    area = w*h
+    print("area:", area, "center x:", center_x, "center y:", center_y)
+    
+    simg2 = cv2.rectangle(red_pixels, (x,y), (x+w,y+h), 255,2)
+    cv2.circle(red_pixels,(int(center_x),int(center_y)),3,(0,110,255),-1)
+    cv2.imshow('mask', red_pixels)
+    if area > 200000 or min_distance < 7:
+        print("object too close, reversing")
+        reverse()
+    elif 20000 < area and area < 100000:
+        center_x = x + (w)/2
+        center_y = y + (h)/2
+        forward()
+        print("ball found, moving forward")
+    elif 100000 < area and area < 200000:
+        print("ball found, stopped")
+        stop() 
+    elif center_x > right_range:
+        print("ball not found, turning right")
+        turn_right()
+        time.sleep(0.2)
+        stop()
+    elif center_x < left_range:
+        print("ball not found, turning left")
+        turn_left()
+        time.sleep(0.2)
+        stop()
+    else:
+        stop()
+        
+    if cv2.waitKey(1) == ord('q'):
+        break
+        
+cv2.destroyAllWindows()
+```
+
 **Second Milestone Code:**
 ```python
 import RPi.GPIO as GPIO
