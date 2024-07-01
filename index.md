@@ -10,6 +10,8 @@ I chose the Ball Tracking Robot as my main project. It uses a computer vision Py
 
 # Second Milstone:
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/3c_5SvEc2xs?si=PZL8ljuQCZalwna-" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
 **Summary:**
 For my second milestone, I implemented the camera and the color detection portion of my project, allowing the robot to see the red color of the ball using OpenCV. Also, I added ultrasonic sensors on the front of the robot to detect if it is too close to the ball or any other object.
 
