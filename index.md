@@ -239,7 +239,7 @@ Figure 1: This is a diagram of an H-bridge configuration, which is commonly used
 - 6V Power Source: Supplies the L298H driver board with power. 
 - Portable Battery Source: Supplies the Raspberry Pi with power.
 
-![Headstone Image](resized rpi setup.gif)
+![Headstone Image](rpi.png)
 ![Headstone Image](hbridge (1).jpg)
 
 Figure 1: Raspberry Pi 4, Figure 2: L298H Driver Board
@@ -780,7 +780,11 @@ Despite this being a starter project, it still came with many challenges. Firstl
 After completing my start project, I will start planning my main project.
 
 # Works Cited:
-
+- https://deringur.github.io/BSE_Derin_Portfolio/
+- https://docs.keyestudio.com/projects/KS3025/en/latest/Python_Windows/2.Projects/Project%2028%EF%BC%9AUltrasonic%20Ranger.html
+- https://www.allaboutcircuits.com/technical-articles/difference-slow-decay-mode-fast-decay-mode-h-bridge-dc-motor-applications/
+- https://www.raspberrypi.com/products/raspberry-pi-4-model-b/
+- 
 
 <!--
 # Ball Tracking Robot
