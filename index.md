@@ -780,11 +780,10 @@ Despite this being a starter project, it still came with many challenges. Firstl
 After completing my start project, I will start planning my main project.
 
 # Works Cited:
-- https://deringur.github.io/BSE_Derin_Portfolio/
-- https://docs.keyestudio.com/projects/KS3025/en/latest/Python_Windows/2.Projects/Project%2028%EF%BC%9AUltrasonic%20Ranger.html
-- https://www.allaboutcircuits.com/technical-articles/difference-slow-decay-mode-fast-decay-mode-h-bridge-dc-motor-applications/
-- https://www.raspberrypi.com/products/raspberry-pi-4-model-b/
-- 
+- Schematic - https://deringur.github.io/BSE_Derin_Portfolio/
+- Ultrasonic Sensor -https://docs.keyestudio.com/projects/KS3025/en/latest/Python_Windows/2.Projects/Project%2028%EF%BC%9AUltrasonic%20Ranger.html
+- H-Bridge - https://www.allaboutcircuits.com/technical-articles/difference-slow-decay-mode-fast-decay-mode-h-bridge-dc-motor-applications/
+- Raspberry Pi - https://www.raspberrypi.com/products/raspberry-pi-4-model-b/
 
 <!--
 # Ball Tracking Robot
