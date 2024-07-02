@@ -62,13 +62,13 @@ while True:
         
 cv2.destroyAllWindows()
 ```
-This code is the main part of my project. Every time the loop runs, it captures the input from the camera, and uses the find_red() and find_blob() functions to process it and isolate the red pixels. Then, it calculates the area of the red pixels found. It also takes the inputs from each ultrasonic sensor using the calculate_distance() function. If this area is greater than 200,000 pixels or if the minimum distance detected by the ultrasonic sensors is less than 7 cms, this means either the ball or another object is too close to the robot. In this case, it will move backwards to prevent collision. If the area of the red pixels is in between 20,000 pixels and 100,000 pixels, then the robot will move forward towards the ball. If the area is between 100,000 pixels and 200,000 pixels, then the robot will stop moving, and park in front of the ball. The code is also constantly tracking the center coordinates of the ball, and if these coordinates are less than a certain threshold or greater than a certain threshold, the robot will turn left or right until the ball is found. If none of these conditions are met, the robot will stop moving. 
+This code is the main part of my project. Every time the loop runs, it captures the input from the camera, and uses the find_red() and find_blob() functions to process it and isolate the red pixels. The size of my frame is 640 pixels by 360 pixels, with an area of 230400 pixels. Then, it calculates the area of the red pixels found. It also takes the inputs from each ultrasonic sensor using the calculate_distance() function. If this area is greater than 200,000 pixels or if the minimum distance detected by the ultrasonic sensors is less than 7 cms, this means either the ball or another object is too close to the robot. In this case, it will move backwards to prevent collision. If the area of the red pixels is in between 20,000 pixels and 100,000 pixels, then the robot will move forward towards the ball. If the area is between 100,000 pixels and 200,000 pixels, then the robot will stop moving, and park in front of the ball. The code is also constantly tracking the center coordinates of the ball, and if these coordinates are less than a certain threshold or greater than a certain threshold, the robot will turn left or right until the ball is found. If none of these conditions are met, the robot will stop moving. 
 
 **Challenges:**
-Overall, this milestone was pretty smooth, but one thing that was challenging was figuring out the order that the robot should process the inputs in.
+Overall, this milestone was pretty smooth, but one thing that was challenging was figuring out which order to layer the if statements. Previously, if the ball was placed a certain position, the robot would move back and forth quickly. When I changed the order of the if statements, this did not happen anymore.
 
 **What's Next:**
-After this, I am going to brainstorm possible modifications I can make to make my project even better.
+After this, I am going to brainstorm possible modifications I can make to make my project even better. Right now, I am thinking of implementing object detection to maybe track other objects, as well as perhaps attatching more hardware devices for more functionality.
 
 # Second Milstone:
 
