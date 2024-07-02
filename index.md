@@ -784,6 +784,7 @@ After completing my start project, I will start planning my main project.
 - Ultrasonic Sensor -https://docs.keyestudio.com/projects/KS3025/en/latest/Python_Windows/2.Projects/Project%2028%EF%BC%9AUltrasonic%20Ranger.html
 - H-Bridge - https://www.allaboutcircuits.com/technical-articles/difference-slow-decay-mode-fast-decay-mode-h-bridge-dc-motor-applications/
 - Raspberry Pi - https://www.raspberrypi.com/products/raspberry-pi-4-model-b/
+- Seven Segment Display - https://www.electronics-tutorials.ws/blog/7-segment-display-tutorial.html
 
 <!--
 # Ball Tracking Robot
