@@ -168,25 +168,7 @@ After this, I will put all my code together and allow the robot to indefinitely 
 
 **Schematic Diagram:**
 
-![Headstone Image](schematic.png)
-
-Ultrasonic sensor 1:
-- TRIG to GPIO 23
-- ECHO to GPIO 24
-Ultrasonic sensor 2:
-- TRIG to GPIO 16
-- ECHO to GPIO 26
-Ultrasonic sensor 3:
-- TRIG to GPIO 5
-- ECHO to GPIO 6:
-
-H-bridge:
-- IN1 to GPIO 17
-- IN2 to GPIO 27
-- ENA to GPIO 4
-- IN3 to GPIO 2 
-- IN4 to GPIO 3
-- ENB to GPIO 14
+![Headstone Image](schematic2.png)
 
 # First Milestone:
 
@@ -780,7 +762,6 @@ Despite this being a starter project, it still came with many challenges. Firstl
 After completing my start project, I will start planning my main project.
 
 # Works Cited:
-- Schematic - https://deringur.github.io/BSE_Derin_Portfolio/
 - Ultrasonic Sensor -https://docs.keyestudio.com/projects/KS3025/en/latest/Python_Windows/2.Projects/Project%2028%EF%BC%9AUltrasonic%20Ranger.html
 - H-Bridge - https://www.allaboutcircuits.com/technical-articles/difference-slow-decay-mode-fast-decay-mode-h-bridge-dc-motor-applications/
 - Raspberry Pi - https://www.raspberrypi.com/products/raspberry-pi-4-model-b/
