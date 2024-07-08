@@ -8,6 +8,34 @@ I chose the Ball Tracking Robot as my main project. It uses a computer vision Py
 
 ![Headstone Image](William_L (1).jpg)
 
+# Modifications:
+
+**Summary:**
+My first modification was allowing the user to manually control the robot, and override it's automatic driving. I did this using MIT App Inventor, and an HC05 bluetooth module. I created an app that allows the user to switch between manual and automatic modes, and gives them five movement functions, forward, reverse, turning left, turning right, and stopping.
+
+**How It Works:**
+The app is connected to the bluetooth module, which is connected to my Raspberry Pi. When a button is pressed, it sends a character through the bluetooth module to the Raspberry Pi. For example, if the forward button was pressed, it would send a "F". The raspberry Pi recieves these characters, and moves the motors accordingly. The default mode is automatic, but if the user presses manual or automatic mode, the robot will switch accordingly. 
+
+```python
+import serial
+
+ser = serial.Serial(
+    port='/dev/serial0',  
+    baudrate=9600,        
+    timeout=1             
+)
+
+while True:
+    if ser.in_waiting > 0:
+        received_data = ser.read().decode('utf-8')  
+```
+This code uses the package pyserial, and configures the serial port to match the hc05 bluetooth module. It uses the port '/dev/serial0', which is often used with Raspberry Pi's. Inside the while loop, if the port has recieved data, it will extract the first character. depending on what that character is, the robot will perform the desired action.
+
+![Headstone Image](robotapp.png)
+![Headstone Image](codeblocks.png)
+
+This is my app on MIT app inventor, and the code blocks that go with it. The code block at the top allow the user to choose a bluetooth device, and connect to it. When the buttons are pressed, they send a character to the bluetooth connection. 
+
 # Third Milestone:
 
 **Summary:**
