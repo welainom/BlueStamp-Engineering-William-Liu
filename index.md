@@ -259,12 +259,13 @@ When completing this milestone, I faced a number of challenges. Firstly, connect
 **What’s Next:**
 After this, I will work on the color detection and ball tracking component of this project, and this seems like more coding, which I am looking forward to. 
 
-# Code:
+# Full Code:
 
 **First Modification Code:**
-
-<pre style="background:#fdfdfd; border:none; height:40pc">
-```python
+<details>
+  <summary>Final Milestone Code:</summary>
+  <pre style="background:#fdfdfd; border:none; height:40pc">
+<code>
 import RPi.GPIO as GPIO
 import cv2
 import numpy as np
@@ -508,9 +509,11 @@ while True:
     if cv2.waitKey(1) == ord('q'):
         break
         
-cv2.destroyAllWindows()
-```
-<pre style="background:#fdfdfd; border:none; height:40pc">
+    cv2.destroyAllWindows()
+</code>
+</pre>
+</details>
+
 **Third Milestone Code:**
 ```python
 import RPi.GPIO as GPIO
@@ -717,7 +720,6 @@ cv2.destroyAllWindows()
 ```
 
 **Second Milestone Code:**
-<pre style="background:#fdfdfd; border:none; height:40pc">
 ```python
 import RPi.GPIO as GPIO
 import cv2
@@ -901,8 +903,6 @@ cv2.destroyAllWindows()
 
 
 **First Milestone Code:**
-
-<pre style="background:#fdfdfd; border:none; height:40pc">
 ```python
 import RPi.GPIO as GPIO
 import cv2
