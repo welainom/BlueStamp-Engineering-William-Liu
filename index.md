@@ -262,6 +262,8 @@ After this, I will work on the color detection and ball tracking component of th
 # Code:
 
 **First Modification Code:**
+
+<pre style="background:#fdfdfd; border:none; height:40pc">
 ```python
 import RPi.GPIO as GPIO
 import cv2
@@ -508,7 +510,7 @@ while True:
         
 cv2.destroyAllWindows()
 ```
-
+<pre style="background:#fdfdfd; border:none; height:40pc">
 **Third Milestone Code:**
 ```python
 import RPi.GPIO as GPIO
@@ -715,6 +717,7 @@ cv2.destroyAllWindows()
 ```
 
 **Second Milestone Code:**
+<pre style="background:#fdfdfd; border:none; height:40pc">
 ```python
 import RPi.GPIO as GPIO
 import cv2
@@ -899,6 +902,7 @@ cv2.destroyAllWindows()
 
 **First Milestone Code:**
 
+<pre style="background:#fdfdfd; border:none; height:40pc">
 ```python
 import RPi.GPIO as GPIO
 import cv2
