@@ -576,11 +576,10 @@ Despite this being a starter project, it still came with many challenges. Firstl
 After completing my start project, I will start planning my main project.
 
 # Works Cited:
-- Ultrasonic Sensor -https://docs.keyestudio.com/projects/KS3025/en/latest/Python_Windows/2.Projects/Project%2028%EF%BC%9AUltrasonic%20Ranger.html
-- H-Bridge - https://www.allaboutcircuits.com/technical-articles/difference-slow-decay-mode-fast-decay-mode-h-bridge-dc-motor-applications/
-- Raspberry Pi - https://www.raspberrypi.com/products/raspberry-pi-4-model-b/
-- Seven Segment Display - https://www.electronics-tutorials.ws/blog/7-segment-display-tutorial.html
-
+- Ultrasonic Sensor - <a href="https://docs.keyestudio.com/projects/KS3025/en/latest/Python_Windows/2.Projects/Project%2028%EF%BC%9AUltrasonic%20Ranger.html"> <ins>Link</ins> </a> 
+- H-Bridge - <a href="https://www.allaboutcircuits.com/technical-articles/difference-slow-decay-mode-fast-decay-mode-h-bridge-dc-motor-applications/"> <ins>Link</ins> </a> 
+- Raspberry Pi -  <a href="https://www.raspberrypi.com/products/raspberry-pi-4-model-b/"> <ins>Link</ins> </a> 
+- Seven Segment Display - <a href="https://www.electronics-tutorials.ws/blog/7-segment-display-tutorial.html"> <ins>Link</ins> </a> 
 <!--
 # Ball Tracking Robot
 <!--Replace this text with a brief description (2-3 sentences) of your project. This description should draw the reader in and make them interested in what you've built. You can include what the biggest challenges, takeaways, and triumphs from completing the project were. As you complete your portfolio, remember your audience is less familiar than you are with all that your project entails!-->
