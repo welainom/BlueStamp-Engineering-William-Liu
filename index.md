@@ -11,7 +11,7 @@ I chose the Ball Tracking Robot as my main project. It uses a computer vision Py
 # Modifications:
 
 **Summary:**
-My first modification was allowing the user to manually control the robot, and override it's automatic driving. I did this using MIT App Inventor, and an HC05 bluetooth module. I created an app that allows the user to switch between manual and automatic modes, and gives them five movement functions, forward, reverse, turning left, turning right, and stopping.
+My first modification was allowing the user to manually control the robot, and override it's automatic driving. I did this using MIT App Inventor, and an HC05 bluetooth module. Using MIT App Inventor, I created an app that allows the user to switch between manual and automatic modes, and gives them five movement functions, forward, reverse, turning left, turning right, and stopping.
 
 **How It Works:**
 The app is connected to the bluetooth module, which is connected to my Raspberry Pi. When a button is pressed, it sends a character through the bluetooth module to the Raspberry Pi. For example, if the forward button was pressed, it would send a "F". The raspberry Pi recieves these characters, and moves the motors accordingly. The default mode is automatic, but if the user presses manual or automatic mode, the robot will switch accordingly. 
@@ -31,7 +31,7 @@ while True:
 ```
 This code uses the package pyserial, and configures the serial port to match the hc05 bluetooth module. It uses the port '/dev/serial0', which is often used with Raspberry Pi's. Inside the while loop, if the port has recieved data, it will extract the first character. depending on what that character is, the robot will perform the desired action.
 
-![Headstone Image](robotapp (2).png) ![Headstone Image](codeblocks.png)
+![Headstone Image](codeblocks.png)
 
 This is my app on MIT app inventor, and the code blocks that go with it. The code block at the top allow the user to choose a bluetooth device, and connect to it. When the buttons are pressed, they send a character to the bluetooth connection. 
 
@@ -260,6 +260,254 @@ When completing this milestone, I faced a number of challenges. Firstly, connect
 After this, I will work on the color detection and ball tracking component of this project, and this seems like more coding, which I am looking forward to. 
 
 # Code:
+
+**First Modification Code:**
+```python
+import RPi.GPIO as GPIO
+import cv2
+import numpy as np
+from picamera2 import Picamera2
+import time
+import serial
+
+# Set up PiCamera
+picam = Picamera2()
+picam.preview_configuration.main.size=(640, 360)
+picam.preview_configuration.main.format="RGB888"
+picam.preview_configuration.align()
+picam.configure("preview")
+picam.start()
+
+#GPIO Setup
+GPIO.setwarnings(False)
+# Left Motor
+in1 = 17 # Forward 
+in2 = 27 # Backward
+ena = 4
+# Right Motor
+in3 = 2 # Foward 
+in4 = 3 # Backward
+enb = 18
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(in1, GPIO.OUT)
+GPIO.setup(in2, GPIO.OUT)
+GPIO.setup(ena, GPIO.OUT)
+GPIO.setup(in3, GPIO.OUT)
+GPIO.setup(in4, GPIO.OUT)
+GPIO.setup(enb, GPIO.OUT)
+
+power_a = GPIO.PWM(ena, 100)
+power_a.start(60)
+
+power_b = GPIO.PWM(enb, 100)
+power_b.start(60)
+
+TRIG_L = 23
+ECHO_L = 24
+TRIG_C = 16
+ECHO_C = 26
+TRIG_R = 5
+ECHO_R = 6
+
+GPIO.setup(TRIG_L, GPIO.OUT)
+GPIO.setup(ECHO_L, GPIO.IN)
+GPIO.setup(TRIG_C, GPIO.OUT)
+GPIO.setup(ECHO_C, GPIO.IN)
+GPIO.setup(TRIG_R, GPIO.OUT)
+GPIO.setup(ECHO_R, GPIO.IN)
+
+GPIO.output(TRIG_L, GPIO.LOW)
+GPIO.output(TRIG_C, GPIO.LOW)
+GPIO.output(TRIG_R, GPIO.LOW)
+time.sleep(1)
+
+ser = serial.Serial(
+    port='/dev/serial0',  # Use '/dev/serial0' for GPIO UART
+    baudrate=9600,        # Set baud rate (match it with HC-05 configuration)
+    timeout=1             # Set a timeout for read operations
+)
+
+def find_distance(trig, echo):
+	start = 0
+	stop = 0
+	
+	GPIO.setup(trig, GPIO.OUT)
+	GPIO.setup(echo, GPIO.IN)
+	
+	GPIO.output(trig, GPIO.LOW)
+	time.sleep(0.01)
+	
+	GPIO.output(trig, GPIO.HIGH)
+	time.sleep(0.00001)
+	GPIO.output(trig, GPIO.LOW)
+	begin = time.time()
+	while GPIO.input(echo) == 0 and time.time() < begin + 0.05:
+		start = time.time()
+	while GPIO.input(echo) == 1 and time.time() < begin + 0.1:
+		stop = time.time()
+	
+	elapsed = stop - start
+	distance = elapsed * 34300
+	distance = distance / 2
+	distance = round(distance, 2)
+	
+	return distance
+
+def forward():
+	GPIO.output(in1, GPIO.HIGH)
+	GPIO.output(in2, GPIO.LOW)
+	
+	GPIO.output(in3, GPIO.HIGH)
+	GPIO.output(in4, GPIO.LOW)
+
+def reverse():
+    GPIO.output(in1, GPIO.LOW)
+    GPIO.output(in2, GPIO.HIGH)
+    
+    GPIO.output(in3, GPIO.LOW)
+    GPIO.output(in4, GPIO.HIGH)
+
+def stop():
+    GPIO.output(in1, GPIO.LOW)
+    GPIO.output(in2, GPIO.LOW)
+    
+    GPIO.output(in3, GPIO.LOW)
+    GPIO.output(in4, GPIO.LOW)
+    
+def turn_left():
+    GPIO.output(in1, GPIO.LOW)
+    GPIO.output(in2, GPIO.HIGH)
+    GPIO.output(in3, GPIO.HIGH)
+    GPIO.output(in4, GPIO.LOW)
+    
+def turn_right():
+    GPIO.output(in1, GPIO.HIGH)
+    GPIO.output(in2, GPIO.LOW)
+    GPIO.output(in3, GPIO.LOW)
+    GPIO.output(in4, GPIO.HIGH)
+    
+def find_red(frame):
+    hsv_roi = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+    
+    lower_red1 = np.array([150, 140, 1])
+    upper_red1 = np.array([190, 255, 255])
+    
+    mask1 = cv2.inRange(hsv_roi, lower_red1, upper_red1)
+    
+    mask = mask1
+    
+    mask = cv2.erode(mask, np.ones((3, 3), np.uint8))
+    mask = cv2.dilate(mask, np.ones((8, 8), np.uint8))
+    
+    # cv2.imshow('mask', mask)  
+    
+    return mask
+    
+def find_blob(blob):
+    largest_contour = 0
+    cont_idx = 0
+    contours, hierarchy = cv2.findContours(blob, cv2.RETR_CCOMP, cv2.CHAIN_APPROX_SIMPLE)
+    
+    for idx, contour in enumerate(contours):
+        area = cv2.contourArea(contour)
+        if (area > largest_contour):
+            largest_contour = area
+            cont_index = idx
+                    
+    r = (0, 0, 2, 2)
+    
+    if len(contours) > 0:
+        r = cv2.boundingRect(contours[cont_index])
+     
+    return r, largest_contour
+
+center_x = 0
+center_y = 0
+left_range = 100
+right_range = 540
+automatic = True
+
+while True:
+    if ser.in_waiting > 0:
+        received_data = ser.read().decode('utf-8')  # Read one byte
+        if received_data == "A":
+            automatic = True
+            print("Automatic")
+        elif received_data == "M":
+            automatic = False
+            print("Manual")
+    
+    video = picam.capture_array()
+    red_pixels = find_red(video)
+    loct, area = find_blob(red_pixels)
+    x, y, w, h = loct
+
+    left = find_distance(TRIG_L, ECHO_L)
+    center = find_distance(TRIG_C, ECHO_C)
+    right = find_distance(TRIG_R, ECHO_R)
+    min_distance = min(left, center, right)
+    area = w*h
+    print("area:", area, "center x:", center_x, "center y:", center_y)
+    
+    simg2 = cv2.rectangle(red_pixels, (x,y), (x+w,y+h), 255,2)
+    cv2.circle(red_pixels,(int(center_x),int(center_y)),3,(0,110,255),-1)
+    cv2.imshow('mask', red_pixels)
+    
+    if automatic:
+        if area > 200000 or min_distance < 7:
+            print("object too close, reversing")
+            reverse()
+        elif 20000 < area and area < 100000:
+            center_x = x + (w)/2
+            center_y = y + (h)/2
+            forward()
+            print("ball found, moving forward")
+        elif 100000 < area and area < 200000:
+            print("ball found, stopped")
+            stop() 
+        elif center_x > right_range:
+            print("ball not found, turning right")
+            turn_right()
+            time.sleep(0.2)
+            stop()
+        elif center_x < left_range:
+            print("ball not found, turning left")
+            turn_left()
+            time.sleep(0.2)
+            stop()
+        else:
+            stop()
+    else:
+        if ser.in_waiting > 0:
+            received_data = ser.read().decode('utf-8')  # Read one byte
+            if received_data == "F":
+                print("Foward")
+                forward()
+            elif received_data == "S":
+                print("STOP")
+                stop()
+            elif received_data == "R":
+                print("TURN right")
+                turn_right()
+            elif received_data == "L":
+                print("TURN left")
+                turn_left()
+            elif received_data == "B":
+                print("Reverse")
+                reverse()
+            elif received_data == "A":
+                automatic = True
+                print("Automatic")
+            elif received_data == "M":
+                automatic = False
+                print("Manual")
+
+    if cv2.waitKey(1) == ord('q'):
+        break
+        
+cv2.destroyAllWindows()
+```
 
 **Third Milestone Code:**
 ```python
@@ -757,6 +1005,8 @@ while(True):
 | Female to Female Jumper Wires | Jumper wires that are necessary for sensor and input motor connections (not included in connections kit above). | $7.98 | <a href="https://www.amazon.com/EDGELEC-Breadboard-1pin-1pin-Connector-Multicolored/dp/B07GCY6CH7/ref=sr_1_3?crid=3C4YB6HOGZ8ZQ&keywords=female%2Bto%2Bfemale%2Bjumper&qid=1689894791&s=electronics&sprefix=female%2Bto%2Bfemale%2Bjumper%2Celectronics%2C161&sr=1-3&th=1"> <ins>Link</ins> </a> |
 |:--:|:--:|:--:|:--:|
 | Soldering Kit | Soldering kit for motor connections (and solderable breadboard, optional).  | $13.59 | <a href="https://www.amazon.com/Soldering-Interchangeable-Adjustable-Temperature-Enthusiast/dp/B087767KNW/ref=sr_1_5?crid=1QYWI5SBQAPH0&keywords=soldering+kit&qid=1689900771&sprefix=soldering+kit%2Caps%2C169&sr=8-5"> <ins>Link</ins> </a> |
+|:--:|:--:|:--:|:--:|
+| DSD TECH HC-05 Bluetooth Module | Bluetooth Serial Pass-through Module for Arduino and Other Microcontrollers | $9.98 | <a href="https://www.amazon.com/DSD-TECH-HC-05-Pass-through-Communication/dp/B01G9KSAF6/ref=sr_1_3?crid=21RRD8OVEBZ2Y&dib=eyJ2IjoiMSJ9.VZL1p5RDGQw7c8DXaqrVkRyfFEBz0HhuagQj9O7D5y7Vz0Nu_seyhu0n8hd8O9KK4hGZ1hlmaqQgJrQl1Ufncq8lbwmYBA8BMy8L25hSIz_KIDQOuXnfsbKsIgf9WEOn2g5Y4HyYi83qaOpbcaNItUcSIXHduwiz0WNcS6IdPAwVk0wcYCcO3yo5rHr-hd79f467TADb0CZt94PmWqoJlub8iJGqzqTrKDmS_b8lMHg.t5-UHYkM52HGhr2VP7oRaoQAYBwfBVwsEd01OJGqqQU&dib_tag=se&keywords=hc-05+bluetooth+module&qid=1720540519&sprefix=hc-0%2Caps%2C167&sr=8-3"> <ins>Link</ins> </a> |
 |:--:|:--:|:--:|:--:|
 
 # Starter Project - Calculator:
