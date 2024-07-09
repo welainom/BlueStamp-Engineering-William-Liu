@@ -31,7 +31,7 @@ while True:
 ```
 This code uses the package pyserial, and configures the serial port to match the hc05 bluetooth module. It uses the port '/dev/serial0', which is often used with Raspberry Pi's. Inside the while loop, if the port has recieved data, it will extract the first character. depending on what that character is, the robot will perform the desired action.
 
-![Headstone Image](robotapp (2).png)
+![Headstone Image](robotapp (2).png) ![Headstone Image](codeblocks.png)
 
 This is my app on MIT app inventor, and the code blocks that go with it. The code block at the top allow the user to choose a bluetooth device, and connect to it. When the buttons are pressed, they send a character to the bluetooth connection. 
 
