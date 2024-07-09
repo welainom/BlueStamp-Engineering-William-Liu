@@ -262,10 +262,7 @@ After this, I will work on the color detection and ball tracking component of th
 # Full Code:
 
 **First Modification Code:**
-<details>
-  <summary>Final Milestone Code:</summary>
-  <pre style="background:#fdfdfd; border:none; height:40pc">
-<code>
+```python
 import RPi.GPIO as GPIO
 import cv2
 import numpy as np
@@ -510,9 +507,7 @@ while True:
         break
         
     cv2.destroyAllWindows()
-</code>
-</pre>
-</details>
+```
 
 **Third Milestone Code:**
 ```python
