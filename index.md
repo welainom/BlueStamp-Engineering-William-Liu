@@ -37,7 +37,7 @@ def video_feed_stream2():
 ```
 This code creates a route of the web server, and these functions are called by the html code to retrieve the video.
 ```html
-<div class="converted-video-container:>
+<div class="converted-video-container">
     <h1>Converted Video Feed</h1>
     <img id="video" src="{{ url_for('video_feed_stream2') }}">
 </div>
@@ -296,7 +296,7 @@ After this, I will work on the color detection and ball tracking component of th
 
 # Full Code:
 
-**First Modification Code:**
+**Final Code:**
 ```python
 import RPi.GPIO as GPIO
 import cv2
@@ -542,6 +542,61 @@ while True:
         break
         
     cv2.destroyAllWindows()
+```
+
+**Web Server Code:**
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Side by Side Video Feed</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+	.other-stuff {
+	   padding: 20px;
+	}
+        .video-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        #video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+	.converted-video-container {
+ 	    max-width: 1000px;
+	    margin: 0 auto;
+	}
+	#video {
+	    width: 100%;
+	    height: auto;
+	    display: block;
+	}
+    </style>
+</head>
+<body>
+    <div class="other-stuff">
+	<h1>Welcome</h1>
+	<a href="https://welainom.github.io/BlueStamp-Engineering-William-Liu/">This is my Website</a>
+    </div
+{>
+    <div class="video-container">
+        <h1>Robot's Video Feed</h1>
+        <img id="video" src="{{ url_for('video_feed_stream') }}">
+    </div>
+    <div class="converted-video-container">
+	<h2>Converted Video Feed</h1>
+	<img id="video" src="{{ url_for('video_feed_stream2') }}">
+    </div>
+</body>
+</html>
 ```
 
 # Bill of Materials:
