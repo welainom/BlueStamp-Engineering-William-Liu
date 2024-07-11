@@ -10,8 +10,39 @@ I chose the Ball Tracking Robot as my main project. It uses a computer vision Py
 
 # Second Modification:
 
-![Headstone Image](finalschematicjpg)
-This is the final schematic, including the bluetooth modification.
+**Summary:** 
+For this modification, I created a web server on my Raspberry Pi, and streamed the video captured by the PiCam to the website. 
+
+**How It works:**
+First, I created a web server on my Raspberry Pi using apache2. I could edit the contents of the website on an html file, but not stream video. In order to do so, I used various flask functions to send the video to an html file, which then streamed the video onto the website.
+
+```python
+def generate_frames2():
+    while True:
+        frame = picam.capture_array()
+        red = find_red(frame)
+        cv2.rectangle(red, (x,y), (x+w,y+h), 255,2)
+        cv2.circle(red,(int(center_x),int(center_y)),3,(0,110,255),-1)
+        ret, buffer = cv2.imencode('.jpg', red)
+        mask = buffer.tobytes()
+        yield (b'--mask\r\n'
+               b'Content-Type: image/jpeg\r\n\r\n' + mask + b'\r\n')    
+```
+This code uses cv2 functions to convert the captured video into something readable by html. This allows for faster processing and better video
+
+```python
+@app.route('/video_feed_red')
+def video_feed_stream2():
+    return Response(generate_frames2(), mimetype='multipart/x-mixed-replace; boundary=mask')
+```
+This code creates a route of the web server, and these functions are called by the html code to retrieve the video.
+```html
+<div class="converted-video-container:>
+    <h1>Converted Video Feed</h1>
+    <img id="video" src="{{ url_for('video_feed_stream2') }}">
+</div>
+```
+This is the html code that takes the video from the python functions. src="{{ url_for('video_feed_stream2') }}, this part specifies the source of the video.
 
 # First Modification:
 
@@ -39,6 +70,9 @@ This code uses the package pyserial, and configures the serial port to match the
 ![Headstone Image](codeblocks.png)
 
 This is my app on MIT app inventor, and the code blocks that go with it. The code block at the top allow the user to choose a bluetooth device, and connect to it. When the buttons are pressed, they send a character to the bluetooth connection. See this video for reference: <a href="https://www.youtube.com/watch?v=vn5UicsOT3Q&t=767s"> <ins>Link</ins> </a> 
+
+![Headstone Image](finalschematic.png)
+This is the final schematic, including the bluetooth modification.
 
 # Third Milestone:
 
