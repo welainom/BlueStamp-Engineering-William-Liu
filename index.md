@@ -8,7 +8,12 @@ I chose the Ball Tracking Robot as my main project. It uses a computer vision Py
 
 ![Headstone Image](William_L (1).jpg)
 
-# Modifications:
+# Second Modification:
+
+![Headstone Image](finalschematicjpg)
+This is the final schematic, including the bluetooth modification.
+
+# First Modification:
 
 **Summary:**
 My first modification was allowing the user to manually control the robot, and override it's automatic driving. I did this using MIT App Inventor, and an HC05 bluetooth module. Using MIT App Inventor, I created an app that allows the user to switch between manual and automatic modes, and gives them five movement functions, forward, reverse, turning left, turning right, and stopping.
@@ -34,9 +39,6 @@ This code uses the package pyserial, and configures the serial port to match the
 ![Headstone Image](codeblocks.png)
 
 This is my app on MIT app inventor, and the code blocks that go with it. The code block at the top allow the user to choose a bluetooth device, and connect to it. When the buttons are pressed, they send a character to the bluetooth connection. See this video for reference: <a href="https://www.youtube.com/watch?v=vn5UicsOT3Q&t=767s"> <ins>Link</ins> </a> 
-
-![Headstone Image](newschematic.png)
-This is the additional wiring required for this milestone. A bluetooth HC-05 module is wired to the Pi.
 
 # Third Milestone:
 
@@ -183,7 +185,7 @@ This function returns the distance detected in an ultrasonic sensor (See Figure 
 
 ![Headstone Image](hcsro4.jpeg)
 
-Figure 1: This is a diagram of an HC-SR04 sensor. The cylinder object on the left transmits the signals and the one on the right receives the signals. VCC and GND connect to power and ground respectively, and Trig and Echo are connected to pins on the raspberry pi. When Trig is set to HIGH, it emits the ultrasonic sound pulses. Echo is set to an input pin, so when it receives the signal, it will emit a pulse. 
+Figure 1: This is a diagram of an HC-SR04 sensor. The cylinder object on the left transmits the signals and the one on the right receives the signals. VCC and GND connect to power and ground respectively, and Trig and Echo are connected to pins on the raspberry pi. When Trig is set to HIGH, it emits the ultrasonic sound pulses. Echo is set to an input pin, so when it receives the signal, it will emit a pulse. Image Credit: <a href="https://docs.keyestudio.com/projects/KS3025/en/latest/Python_Windows/2.Projects/Project%2028%EF%BC%9AUltrasonic%20Ranger.html"> <ins>Link</ins> </a> 
 
 **Parts Used:**
 - Raspberry Pi camera module: A 12 megapixel camera that is compatible with Raspberry Pi 4
@@ -195,11 +197,6 @@ I spent almost a whole day trying to figure out what was wrong with one of the u
 
 **What's Next:**
 After this, I will put all my code together and allow the robot to indefinitely search for the ball.
-
-**Schematic Diagram:**
-
-![Headstone Image](schematic2.png)
-Copy the first ultrasonic sensor's wiring for the next two and three, but use different GPIO pins on the Pi.
 
 # First Milestone:
 
@@ -255,7 +252,7 @@ Figure 1: This is a diagram of an H-bridge configuration, which is commonly used
 ![Headstone Image](rpi.png)
 ![Headstone Image](hbridge (1).jpg)
 
-Figure 1: Raspberry Pi 4, Figure 2: L298H Driver Board
+Figure 1: Raspberry Pi 4. Image Credit: <a href="https://www.raspberrypi.com/products/raspberry-pi-4-model-b/"> <ins>Link</ins> </a> , Figure 2: L298H Driver Board. Image Credit: <a href="https://www.allaboutcircuits.com/technical-articles/difference-slow-decay-mode-fast-decay-mode-h-bridge-dc-motor-applications/"> <ins>Link</ins> </a> 
 
 **Challenges:**
 When completing this milestone, I faced a number of challenges. Firstly, connecting the Raspberry Pi to my computer took a whole day of trial and error until it finally connected. Additionally, the wiring was a challenge. It took me a while to find out which output and input pins on the L298H Driver Board corresponded with which motor. After I finished these tasks, writing code was much simpler. 
