@@ -11,7 +11,7 @@ I chose the Ball Tracking Robot as my main project. It uses a computer vision Py
 # Second Modification:
 
 **Summary:** 
-For this modification, I created a web server on my Raspberry Pi, and streamed the video captured by the PiCam to the website. 
+For this modification, I created a web server on my Raspberry Pi using apache2 and html, and streamed the video captured by the PiCam to the website. 
 
 **How It works:**
 First, I created a web server on my Raspberry Pi using apache2. I could edit the contents of the website on an html file, but not stream video. In order to do so, I used various flask functions to send the video to an html file, which then streamed the video onto the website.
@@ -29,25 +29,24 @@ def generate_frames2():
                b'Content-Type: image/jpeg\r\n\r\n' + mask + b'\r\n')    
 ```
 This code uses cv2 functions to convert the captured video into something readable by html. This allows for faster processing and better video
-
 ```python
 @app.route('/video_feed_red')
 def video_feed_stream2():
     return Response(generate_frames2(), mimetype='multipart/x-mixed-replace; boundary=mask')
 ```
-This code creates a route of the web server, and these functions are called by the html code to retrieve the video.
+This code creates a route of the web server, and it calls the generate_frames2 function to retrieve the video.
 ```html
 <div class="converted-video-container">
     <h1>Converted Video Feed</h1>
     <img id="video" src="{{ url_for('video_feed_stream2') }}">
 </div>
 ```
-This is the html code that takes the video from the python functions. src="{{ url_for('video_feed_stream2') }}, this part specifies the source of the video.
+This is the html code that takes the video from the python functions. src="{{ url_for('video_feed_stream2') }} specifies the source of the video, which is what the function video_feed_stream2() returns.
 
 # First Modification:
 
 **Summary:**
-My first modification was allowing the user to manually control the robot, and override it's automatic driving. I did this using MIT App Inventor, and an HC05 bluetooth module. Using MIT App Inventor, I created an app that allows the user to switch between manual and automatic modes, and gives them five movement functions, forward, reverse, turning left, turning right, and stopping.
+My first modification was allowing the user to manually control the robot, and override it's automatic driving. I did this using MIT App Inventor, and an HC05 bluetooth module. Using MIT App Inventor, I created an app that allows the user to switch between manual and automatic modes, and gives them five movement functions, forward, reverse, turning left, turning right, and stopping. Also, the user can adjust the speed of the robot between three speeds, slow, medium, or fast.
 
 **How It Works:**
 The app is connected to the bluetooth module, which is connected to my Raspberry Pi. When a button is pressed, it sends a character through the bluetooth module to the Raspberry Pi. For example, if the forward button was pressed, it would send a "F". The raspberry Pi recieves these characters, and moves the motors accordingly. The default mode is automatic, but if the user presses manual or automatic mode, the robot will switch accordingly. 
@@ -63,13 +62,19 @@ ser = serial.Serial(
 
 while True:
     if ser.in_waiting > 0:
-        received_data = ser.read().decode('utf-8')  
+        received_data = ser.read().decode('utf-8')
+    if received_data == "A":
+	automatic = True
+	#print("Automatic")
+    elif received_data == "M":
+	automatic = False
+	#print("Manual")
 ```
-This code uses the package pyserial, and configures the serial port to match the hc05 bluetooth module. It uses the port '/dev/serial0', which is often used with Raspberry Pi's. Inside the while loop, if the port has recieved data, it will extract the first character. depending on what that character is, the robot will perform the desired action.
+This code uses the package pyserial, and configures the serial port to match the hc05 bluetooth module. It uses the port '/dev/serial0', which is often used with Raspberry Pi's. Inside the while loop, if the port has recieved data, it will extract the first character. depending on what that character is, the robot will perform the desired action. For example, if it receives an "A", it will be set to automatic mode, and the robot will ignore any other data sent at it. Conversely, if it receives an "M", it will be set to manual mode, and the robot will listen and react to any data sent at it.
 
-![Headstone Image](codeblocks.png)
+![Headstone Image](finalfinalcodeblocks.png)
 
-This is my app on MIT app inventor, and the code blocks that go with it. The code block at the top allow the user to choose a bluetooth device, and connect to it. When the buttons are pressed, they send a character to the bluetooth connection. See this video for reference: <a href="https://www.youtube.com/watch?v=vn5UicsOT3Q&t=767s"> <ins>Link</ins> </a> 
+This is my app on MIT app inventor, and the code blocks that go with it. The code block at the top allow the user to choose a bluetooth device, and connect to it. When the buttons are pressed, they send a character to the bluetooth connection. For example, Button 1 is the forward button, so if that is pressed, an "F" will be sent to the Pi, and the See this video for reference: <a href="https://www.youtube.com/watch?v=vn5UicsOT3Q&t=767s"> <ins>Link</ins> </a> 
 
 ![Headstone Image](finalschematic.png)
 This is the final schematic, including the bluetooth modification.
@@ -298,17 +303,19 @@ After this, I will work on the color detection and ball tracking component of th
 
 **Final Code:**
 ```python
-import RPi.GPIO as GPIO
+from flask import Flask, Response, render_template
 import cv2
-import numpy as np
 from picamera2 import Picamera2
-import time
+import numpy as np
+import time 
 import serial
+import RPi.GPIO as GPIO
 
-# Set up PiCamera
+app = Flask(__name__)
+
 picam = Picamera2()
-picam.preview_configuration.main.size=(640, 360)
-picam.preview_configuration.main.format="RGB888"
+picam.preview_configuration.main.size = (640, 360)
+picam.preview_configuration.main.format = "RGB888"
 picam.preview_configuration.align()
 picam.configure("preview")
 picam.start()
@@ -333,10 +340,10 @@ GPIO.setup(in4, GPIO.OUT)
 GPIO.setup(enb, GPIO.OUT)
 
 power_a = GPIO.PWM(ena, 100)
-power_a.start(60)
+power_a.start(75)
 
 power_b = GPIO.PWM(enb, 100)
-power_b.start(60)
+power_b.start(75)
 
 TRIG_L = 23
 ECHO_L = 24
@@ -459,62 +466,81 @@ def find_blob(blob):
 
 center_x = 0
 center_y = 0
-left_range = 100
-right_range = 540
-automatic = True
+x = 0
+y = 0
+w = 0 
+h = 0
+def generate_frames():
+    left_range = 100
+    right_range = 540
+    automatic = True
+    received_data = "A"
+    global center_x, center_y
+    global x, y, w, h
+    
+    while True:
+        frame = picam.capture_array()
+        
+        red_pixels = find_red(frame)
+        loct, area = find_blob(red_pixels)
+        x, y, w, h = loct
 
-while True:
-    if ser.in_waiting > 0:
-        received_data = ser.read().decode('utf-8')  # Read one byte
+        left = find_distance(TRIG_L, ECHO_L)
+        center = find_distance(TRIG_C, ECHO_C)
+        right = find_distance(TRIG_R, ECHO_R)
+        min_distance = min(left, center, right)
+        area = w*h
+
+        cv2.rectangle(frame, (x,y), (x+w,y+h), 255,2)
+        cv2.circle(frame,(int(center_x),int(center_y)),3,(0,110,255),-1)
+        ret, buffer = cv2.imencode('.jpg', frame)
+        mask = buffer.tobytes()
+        yield (b'--mask\r\n'
+               b'Content-Type: image/jpeg\r\n\r\n' + mask + b'\r\n')    
+               
+        if ser.in_waiting > 0:
+            received_data = ser.read().decode('utf-8')  # Read one byte
         if received_data == "A":
             automatic = True
-            print("Automatic")
+            #print("Automatic")
         elif received_data == "M":
             automatic = False
-            print("Manual")
-    
-    video = picam.capture_array()
-    red_pixels = find_red(video)
-    loct, area = find_blob(red_pixels)
-    x, y, w, h = loct
-
-    left = find_distance(TRIG_L, ECHO_L)
-    center = find_distance(TRIG_C, ECHO_C)
-    right = find_distance(TRIG_R, ECHO_R)
-    min_distance = min(left, center, right)
-    area = w*h
-    print("area:", area, "center x:", center_x, "center y:", center_y)
-    
-    simg2 = cv2.rectangle(red_pixels, (x,y), (x+w,y+h), 255,2)
-    cv2.circle(red_pixels,(int(center_x),int(center_y)),3,(0,110,255),-1)
-    cv2.imshow('mask', red_pixels)
-    
-    if automatic:
-        if area > 200000 or min_distance < 7:
-            print("object too close, reversing")
-            reverse()
-        elif 20000 < area and area < 100000:
-            center_x = x + (w)/2
-            center_y = y + (h)/2
-            forward()
-            print("ball found, moving forward")
-        elif 100000 < area and area < 200000:
-            print("ball found, stopped")
-            stop() 
-        elif center_x > right_range:
-            print("ball not found, turning right")
-            turn_right()
-            time.sleep(0.2)
-            stop()
-        elif center_x < left_range:
-            print("ball not found, turning left")
-            turn_left()
-            time.sleep(0.2)
-            stop()
+            #print("Manual")
+        if received_data == "1":
+            power_a.ChangeDutyCycle(50)
+            power_b.ChangeDutyCycle(50)
+        elif received_data == "2":
+            power_a.ChangeDutyCycle(75)
+            power_b.ChangeDutyCycle(75)
+        elif received_data == "3":
+            power_a.ChangeDutyCycle(100)
+            power_b.ChangeDutyCycle(100)
+        if automatic:
+            if area > 20000:
+                center_x = x + (w)/2
+                center_y = y + (h)/2
+            if area > 200000 or min_distance < 7:
+                print("object too close, reversing")
+                reverse()
+            elif 20000 < area and area < 100000 and left_range <= center_x <= right_range:
+                forward()
+                print("ball found, moving forward")
+            elif 100000 < area and area < 200000:
+                print("ball found, stopped")
+                stop() 
+            elif center_x > right_range:
+                print("ball not found, turning right")
+                turn_right()
+                time.sleep(0.2)
+                stop()
+            elif center_x < left_range:
+                print("ball not found, turning left")
+                turn_left()
+                time.sleep(0.2)
+                stop()
+            else:
+                stop()
         else:
-            stop()
-    else:
-        if ser.in_waiting > 0:
             received_data = ser.read().decode('utf-8')  # Read one byte
             if received_data == "F":
                 print("Foward")
@@ -538,10 +564,32 @@ while True:
                 automatic = False
                 print("Manual")
 
-    if cv2.waitKey(1) == ord('q'):
-        break
-        
-    cv2.destroyAllWindows()
+def generate_frames2():
+    while True:
+        frame = picam.capture_array()
+        red = find_red(frame)
+        cv2.rectangle(red, (x,y), (x+w,y+h), 255,2)
+        cv2.circle(red,(int(center_x),int(center_y)),3,(0,110,255),-1)
+        ret, buffer = cv2.imencode('.jpg', red)
+        mask = buffer.tobytes()
+        yield (b'--mask\r\n'
+               b'Content-Type: image/jpeg\r\n\r\n' + mask + b'\r\n')            
+
+@app.route('/video_feed')
+def video_feed_stream():
+    return Response(generate_frames(), mimetype='multipart/x-mixed-replace; boundary=mask')
+
+@app.route('/video_feed_red')
+def video_feed_stream2():
+    return Response(generate_frames2(), mimetype='multipart/x-mixed-replace; boundary=mask')
+
+@app.route('/side_by_side.html')
+def side_by_side_html():
+    return render_template('side_by_side.html')
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
+
 ```
 
 **Web Server Code:**
@@ -553,47 +601,28 @@ while True:
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Side by Side Video Feed</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            padding: 20px;
-        }
+	body {
+	    font-family: Arial, sans-serif;
+	    background-color: #ffffff;
+	    padding: 15px;
+	}
 	.other-stuff {
-	   padding: 20px;
-	}
-        .video-container {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        #video {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-	.converted-video-container {
- 	    max-width: 1000px;
-	    margin: 0 auto;
-	}
-	#video {
-	    width: 100%;
-	    height: auto;
-	    display: block;
+	    padding: 20px;
 	}
     </style>
-</head>
+<head>
 <body>
-    <div class="other-stuff">
-	<h1>Welcome</h1>
-	<a href="https://welainom.github.io/BlueStamp-Engineering-William-Liu/">This is my Website</a>
-    </div
-{>
-    <div class="video-container">
-        <h1>Robot's Video Feed</h1>
+    div class="other-stuff">
+        <h1 style="font-size: 50px; font-weight: bold">Welcome To My Web Server</h1>
+        <a href="https://welainom.github.io/BlueStamp-Engineering-William-Liu/>This is my Website</a>
+    </div>
+    <div style="width: 50%; height: 50%; float: left">
+        <h1 style="font-size: 30px; font-weight: bold">Robot's Video Feed</h1>
         <img id="video" src="{{ url_for('video_feed_stream') }}">
     </div>
-    <div class="converted-video-container">
-	<h2>Converted Video Feed</h1>
-	<img id="video" src="{{ url_for('video_feed_stream2') }}">
+    <div style="width: 50%; height: 50%; float: right" >
+        <h2 style="font-size: 30spx; font-weight: bold">Converted Video Feed</>
+        <img id="video" src="{{ url_for('video_feed_stream2') }}">
     </div>
 </body>
 </html>
