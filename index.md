@@ -74,7 +74,7 @@ This code uses the package pyserial, and configures the serial port to match the
 
 ![Headstone Image](finalfinalcodeblocks.png)
 
-This is my app on MIT app inventor, and the code blocks that go with it. The code block at the top allow the user to choose a bluetooth device, and connect to it. When the buttons are pressed, they send a character to the bluetooth connection. For example, Button 1 is the forward button, so if that is pressed, an "F" will be sent to the Pi, and the See this video for reference: <a href="https://www.youtube.com/watch?v=vn5UicsOT3Q&t=767s"> <ins>Link</ins> </a> 
+This is my app on MIT app inventor, and the code blocks that go with it. The code block at the top allow the user to choose a bluetooth device, and connect to it. When the buttons are pressed, they send a character to the bluetooth connection. For example, Button 1 is the forward button, so if that is pressed, an "F" will be sent to the Pi, and the robot will move forward. See this video for reference: <a href="https://www.youtube.com/watch?v=vn5UicsOT3Q&t=767s"> <ins>Link</ins> </a> 
 
 ![Headstone Image](finalschematic.png)
 This is the final schematic, including the bluetooth modification.
