@@ -86,7 +86,7 @@ Originally, instead of the five movement buttons, I wanted to let the user move 
 After this, I plan to add a second modification to my project, but I have not decided what to add yet.
 
 ![Headstone Image](schematicccc.png)
-*wire the remaining two ultrasonic sensors similarly
+*wire the remaining two ultrasonic sensors similarly <br>
 This is the final schematic, including the bluetooth modification.
 
 # Third Milestone:
