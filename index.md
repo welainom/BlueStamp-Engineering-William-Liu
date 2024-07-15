@@ -308,7 +308,13 @@ When completing this milestone, I faced a number of challenges. Firstly, connect
 **What’s Next:**
 After this, I will work on the color detection and ball tracking component of this project, and this seems like more coding, which I am looking forward to. 
 
-# Full Code:
+# Code:
+
+**Testing Code:**
+<a href="https://github.com/welainom/BlueStamp-Engineering-William-Liu/blob/gh-pages/bluetoothtest.py"> Bluetooth Test</a>
+<a href="https://github.com/welainom/BlueStamp-Engineering-William-Liu/blob/gh-pages/cameratest.py"> Camera Test</a>
+<a href="https://github.com/welainom/BlueStamp-Engineering-William-Liu/blob/gh-pages/motortest.py"> Motor Test</a>
+<a href="https://github.com/welainom/BlueStamp-Engineering-William-Liu/blob/gh-pages/ultrasonictest.py"> Ultrasonic Test</a>
 
 **Final Code:**
 ```python
