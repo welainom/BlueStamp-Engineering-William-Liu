@@ -390,37 +390,37 @@ ser = serial.Serial(
 )
 
 def find_distance(trig, echo):
-	start = 0
-	stop = 0
+    start = 0
+    stop = 0
 	
-	GPIO.setup(trig, GPIO.OUT)
-	GPIO.setup(echo, GPIO.IN)
+    GPIO.setup(trig, GPIO.OUT)
+    GPIO.setup(echo, GPIO.IN)
+
+    GPIO.output(trig, GPIO.LOW)
+    time.sleep(0.01)
 	
-	GPIO.output(trig, GPIO.LOW)
-	time.sleep(0.01)
+    GPIO.output(trig, GPIO.HIGH)
+    time.sleep(0.00001)
+    GPIO.output(trig, GPIO.LOW)
+    begin = time.time()
+    while GPIO.input(echo) == 0 and time.time() < begin + 0.05:
+	start = time.time()
+    while GPIO.input(echo) == 1 and time.time() < begin + 0.1:
+        stop = time.time()
+
+    elapsed = stop - start
+    distance = elapsed * 34300
+    distance = distance / 2
+    distance = round(distance, 2)
 	
-	GPIO.output(trig, GPIO.HIGH)
-	time.sleep(0.00001)
-	GPIO.output(trig, GPIO.LOW)
-	begin = time.time()
-	while GPIO.input(echo) == 0 and time.time() < begin + 0.05:
-		start = time.time()
-	while GPIO.input(echo) == 1 and time.time() < begin + 0.1:
-		stop = time.time()
-	
-	elapsed = stop - start
-	distance = elapsed * 34300
-	distance = distance / 2
-	distance = round(distance, 2)
-	
-	return distance
+    return distance
 
 def forward():
-	GPIO.output(in1, GPIO.HIGH)
-	GPIO.output(in2, GPIO.LOW)
+    GPIO.output(in1, GPIO.HIGH)
+    GPIO.output(in2, GPIO.LOW)
 	
-	GPIO.output(in3, GPIO.HIGH)
-	GPIO.output(in4, GPIO.LOW)
+    GPIO.output(in3, GPIO.HIGH)
+    GPIO.output(in4, GPIO.LOW)
 
 def reverse():
     GPIO.output(in1, GPIO.LOW)
