@@ -36,10 +36,10 @@ def video_feed_stream2():
 ```
 This code creates a route of the web server, and it calls the generate_frames2 function to retrieve the video.
 ```html
-<div class="converted-video-container">
-    <h1>Converted Video Feed</h1>
-    <img id="video" src="{{ url_for('video_feed_stream2') }}">
-</div>
+<div style="width: 50%; height: 50%; float: right" >
+	<h2 style="font-size: 30spx; font-weight: bold">Converted Video Feed</h1>
+	<img id="video" src="{{ url_for('video_feed_stream2') }}">
+    </div>
 ```
 This is the html code that takes the video from the python functions. src="{{ url_for('video_feed_stream2') }} specifies the source of the video, which is what the function video_feed_stream2() returns.
 
@@ -499,13 +499,14 @@ def generate_frames():
                b'Content-Type: image/jpeg\r\n\r\n' + mask + b'\r\n')    
                
         if ser.in_waiting > 0:
-            received_data = ser.read().decode('utf-8')  # Read one byte
+            received_data = ser.read().decode('utf-8') 
         if received_data == "A":
             automatic = True
             #print("Automatic")
         elif received_data == "M":
             automatic = False
             #print("Manual")
+            
         if received_data == "1":
             power_a.ChangeDutyCycle(50)
             power_b.ChangeDutyCycle(50)
@@ -515,6 +516,7 @@ def generate_frames():
         elif received_data == "3":
             power_a.ChangeDutyCycle(100)
             power_b.ChangeDutyCycle(100)
+            
         if automatic:
             if area > 20000:
                 center_x = x + (w)/2
@@ -541,7 +543,7 @@ def generate_frames():
             else:
                 stop()
         else:
-            received_data = ser.read().decode('utf-8')  # Read one byte
+            received_data = ser.read().decode('utf-8')
             if received_data == "F":
                 print("Foward")
                 forward()
@@ -589,40 +591,40 @@ def side_by_side_html():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
-
 ```
 
 **Web Server Code:**
 ```html
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Side by Side Video Feed</title>
     <style>
-	body {
-	    font-family: Arial, sans-serif;
-	    background-color: #ffffff;
-	    padding: 15px;
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            padding: 15px;
 	}
 	.other-stuff {
 	    padding: 20px;
 	}
     </style>
-<head>
+</head>
 <body>
-    div class="other-stuff">
-        <h1 style="font-size: 50px; font-weight: bold">Welcome To My Web Server</h1>
-        <a href="https://welainom.github.io/BlueStamp-Engineering-William-Liu/>This is my Website</a>
+    <div class="other-stuff">
+	<h1 style="font-size: 50px; font-weight: bold">Welcome To My Web Server</h1>
+	<a href="https://welainom.github.io/BlueStamp-Engineering-William-Liu/">This is my Website</a>
     </div>
     <div style="width: 50%; height: 50%; float: left">
         <h1 style="font-size: 30px; font-weight: bold">Robot's Video Feed</h1>
         <img id="video" src="{{ url_for('video_feed_stream') }}">
     </div>
     <div style="width: 50%; height: 50%; float: right" >
-        <h2 style="font-size: 30spx; font-weight: bold">Converted Video Feed</>
-        <img id="video" src="{{ url_for('video_feed_stream2') }}">
+	<h2 style="font-size: 30spx; font-weight: bold">Converted Video Feed</h1>
+	<img id="video" src="{{ url_for('video_feed_stream2') }}">
     </div>
 </body>
 </html>
