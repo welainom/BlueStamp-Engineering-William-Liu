@@ -311,7 +311,9 @@ After this, I will work on the color detection and ball tracking component of th
 # Code:
 
 **Testing Code:**
+<br>
 <a href="https://github.com/welainom/BlueStamp-Engineering-William-Liu/blob/gh-pages/bluetoothtest.py"> Bluetooth Test</a>
+<br>
 <a href="https://github.com/welainom/BlueStamp-Engineering-William-Liu/blob/gh-pages/cameratest.py"> Camera Test</a>
 <a href="https://github.com/welainom/BlueStamp-Engineering-William-Liu/blob/gh-pages/motortest.py"> Motor Test</a>
 <a href="https://github.com/welainom/BlueStamp-Engineering-William-Liu/blob/gh-pages/ultrasonictest.py"> Ultrasonic Test</a>
