@@ -37,11 +37,14 @@ def video_feed_stream2():
 This code creates a route of the web server, and it calls the generate_frames2 function to retrieve the video.
 ```html
 <div style="width: 50%; height: 50%; float: right" >
-	<h2 style="font-size: 30spx; font-weight: bold">Converted Video Feed</h1>
-	<img id="video" src="{{ url_for('video_feed_stream2') }}">
-    </div>
+    <h2 style="font-size: 30spx; font-weight: bold">Converted Video Feed</h1>
+    <img id="video" src="{{ url_for('video_feed_stream2') }}">
+</div>
 ```
 This is the html code that takes the video from the python functions. src="{{ url_for('video_feed_stream2') }} specifies the source of the video, which is what the function video_feed_stream2() returns.
+
+**Challenges:**
+This modification was not an easy one, due to the many parts that were required to make it work. After setting up the web server, I had to learn how to edit the contents using html. After this, I had to flask, a completely new library to stream the video. After I got this to work, I had to find a way to integrate the movement code into one of the streaming functions. This required a lot of tinkering with the code, which took a while.
 
 # First Modification:
 
@@ -76,7 +79,14 @@ This code uses the package pyserial, and configures the serial port to match the
 
 This is my app on MIT app inventor, and the code blocks that go with it. The code block at the top allow the user to choose a bluetooth device, and connect to it. When the buttons are pressed, they send a character to the bluetooth connection. For example, Button 1 is the forward button, so if that is pressed, an "F" will be sent to the Pi, and the robot will move forward. See this video for reference: <a href="https://www.youtube.com/watch?v=vn5UicsOT3Q&t=767s"> <ins>Link</ins> </a> 
 
+**Challenges:**
+Originally, instead of the five movement buttons, I wanted to let the user move the robot using a joystick. However, after doing some research, I felt that it was too difficult to create on a simple app maker like MIT App Inventor, so I just opted to make the movement buttons. Additionally, connecting the HC-05 to my phone proved to be a bigger challenge than expected. It would not pair effectively until I forgot the device and re-paired it.
+
+**What's Next:**
+After this, I plan to add a second modification to my project, but I have not decided what to add yet.
+
 ![Headstone Image](finalschematic.png)
+*wire the remaining two ultrasonic sensors similarly
 This is the final schematic, including the bluetooth modification.
 
 # Third Milestone:
@@ -288,8 +298,7 @@ Figure 1: This is a diagram of an H-bridge configuration, which is commonly used
 - 6V Power Source: Supplies the L298H driver board with power. 
 - Portable Battery Source: Supplies the Raspberry Pi with power.
 
-![Headstone Image](rpi.png)
-![Headstone Image](hbridge (1).jpg)
+![Headstone Image](rpi (1) (1).png) ![Headstone Image](hbridge (1).jpg)
 
 Figure 1: Raspberry Pi 4. Image Credit: <a href="https://www.raspberrypi.com/products/raspberry-pi-4-model-b/"> <ins>Link</ins> </a> , Figure 2: L298H Driver Board. Image Credit: <a href="https://www.allaboutcircuits.com/technical-articles/difference-slow-decay-mode-fast-decay-mode-h-bridge-dc-motor-applications/"> <ins>Link</ins> </a> 
 
