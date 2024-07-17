@@ -13,6 +13,8 @@ I chose the Ball Tracking Robot as my main project. It uses a computer vision Py
 **Summary:** 
 For this modification, I created a web server on my Raspberry Pi using apache2 and html, and streamed the video captured by the PiCam to the website. 
 
+![Headstone Image](webservergif.gif)
+
 **How It works:**
 First, I created a web server on my Raspberry Pi using apache2. I could edit the contents of the website on an html file, but not stream video. In order to do so, I used various flask functions to send the video to an html file, which then streamed the video onto the website.
 
