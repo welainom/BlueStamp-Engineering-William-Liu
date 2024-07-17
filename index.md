@@ -13,6 +13,8 @@ I chose the Ball Tracking Robot as my main project. It uses a computer vision Py
 **Summary:** 
 For this modification, I created a web server on my Raspberry Pi using apache2 and html, and streamed the video captured by the PiCam to the website. 
 
+![Headstone Image](webservergif.gif)
+
 **How It works:**
 First, I created a web server on my Raspberry Pi using apache2. I could edit the contents of the website on an html file, but not stream video. In order to do so, I used various flask functions to send the video to an html file, which then streamed the video onto the website.
 
@@ -44,7 +46,7 @@ This code creates a route of the web server, and it calls the generate_frames2 f
 This is the html code that takes the video from the python functions. src="{{ url_for('video_feed_stream2') }} specifies the source of the video, which is what the function video_feed_stream2() returns.
 
 **Challenges:**
-This modification was not an easy one, due to the many parts that were required to make it work. After setting up the web server, I had to learn how to edit the contents using html. After this, I had to flask, a completely new library to stream the video. After I got this to work, I had to find a way to integrate the movement code into one of the streaming functions. This required a lot of tinkering with the code, which took a while.
+This modification was not an easy one, due to the many parts that were required to make it work. After setting up the web server, I had to learn how to edit the contents using html. After this, I had to use flask, a completely new library to stream the video. After I got this to work, I had to find a way to integrate the movement code into one of the streaming functions. This required a lot of tinkering with the code, which took a while.
 
 # First Modification:
 
@@ -73,9 +75,10 @@ while True:
 	automatic = False
 	#print("Manual")
 ```
-This code uses the package pyserial, and configures the serial port to match the hc05 bluetooth module. It uses the port '/dev/serial0', which is often used with Raspberry Pi's. Inside the while loop, if the port has recieved data, it will extract the first character. depending on what that character is, the robot will perform the desired action. For example, if it receives an "A", it will be set to automatic mode, and the robot will ignore any other data sent at it. Conversely, if it receives an "M", it will be set to manual mode, and the robot will listen and react to any data sent at it.
+This code uses the package pyserial, and configures the serial port to match the hc05 bluetooth module. It uses the port '/dev/serial0', which is often used with Raspberry Pis. Inside the while loop, if the port has received data, it will extract the first character. Fepending on what that character is, the robot will perform the desired action. For example, if it receives an "A", it will be set to automatic mode, and the robot will ignore any other data sent at it. Conversely, if it receives an "M", it will be set to manual mode, and the robot will listen and react to any data sent to it.
 
 ![Headstone Image](finalfinalcodeblocks.png)
+![Headstone Image](Screenshot_20240717-092754.png)
 
 This is my app on MIT app inventor, and the code blocks that go with it. The code block at the top allow the user to choose a bluetooth device, and connect to it. When the buttons are pressed, they send a character to the bluetooth connection. For example, Button 1 is the forward button, so if that is pressed, an "F" will be sent to the Pi, and the robot will move forward. See this video for reference: <a href="https://www.youtube.com/watch?v=vn5UicsOT3Q&t=767s"> <ins>Link</ins> </a> 
 
