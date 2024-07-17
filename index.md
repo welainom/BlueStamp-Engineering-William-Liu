@@ -13,7 +13,6 @@ I chose the Ball Tracking Robot as my main project. It uses a computer vision Py
 **Summary:** 
 For this modification, I created a web server on my Raspberry Pi using apache2 and html, and streamed the video captured by the PiCam to the website. 
 
-
 **How It works:**
 First, I created a web server on my Raspberry Pi using apache2. I could edit the contents of the website on an html file, but not stream video. In order to do so, I used various flask functions to send the video to an html file, which then streamed the video onto the website.
 
@@ -74,7 +73,7 @@ while True:
 	automatic = False
 	#print("Manual")
 ```
-This code uses the package pyserial, and configures the serial port to match the hc05 bluetooth module. It uses the port '/dev/serial0', which is often used with Raspberry Pis. Inside the while loop, if the port has received data, it will extract the first character. Fepending on what that character is, the robot will perform the desired action. For example, if it receives an "A", it will be set to automatic mode, and the robot will ignore any other data sent at it. Conversely, if it receives an "M", it will be set to manual mode, and the robot will listen and react to any data sent to it.
+This code uses the package pyserial, and configures the serial port to match the hc05 bluetooth module. It uses the port '/dev/serial0', which is often used with Raspberry Pis. Inside the while loop, if the port has received data, it will extract the first character. Depending on what that character is, the robot will perform the desired action. For example, if it receives an "A", it will be set to automatic mode, and the robot will ignore any other data sent at it. Conversely, if it receives an "M", it will be set to manual mode, and the robot will listen and react to any data sent to it.
 
 ![Headstone Image](finalfinalcodeblocks.png)
 
