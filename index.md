@@ -43,7 +43,7 @@ This code creates a route of the web server, and it calls the generate_frames2 f
     <img id="video" src="{{ url_for('video_feed_stream2') }}">
 </div>
 ```
-This is the html code that takes the video from the python functions. src="{{ url_for('video_feed_stream2') }} specifies the source of the video, which is what the function video_feed_stream2() returns.
+This is part of the html code that takes the video from the python functions. src="{{ url_for('video_feed_stream2') }}" specifies the source of the video, which is what the function video_feed_stream2() returns.
 
 **Challenges:**
 This modification was not an easy one, due to the many parts that were required to make it work. After setting up the web server, I had to learn how to edit the contents using html. After this, I had to use flask, a completely new library to stream the video. After I got this to work, I had to find a way to integrate the movement code into one of the streaming functions. This required a lot of tinkering with the code, which took a while.
