@@ -319,6 +319,8 @@ After this, I will work on the color detection and ball tracking component of th
 <a href="https://github.com/welainom/BlueStamp-Engineering-William-Liu/blob/gh-pages/motortest.py"> Motor Test</a>
 <br>
 <a href="https://github.com/welainom/BlueStamp-Engineering-William-Liu/blob/gh-pages/ultrasonictest.py"> Ultrasonic Test</a>
+<br>
+<a href="https://github.com/welainom/BlueStamp-Engineering-William-Liu/blob/gh-pages/videotest.py"> Video Streaming Test</a>
 
 **Final Code:**
 ```python
@@ -359,10 +361,10 @@ GPIO.setup(in4, GPIO.OUT)
 GPIO.setup(enb, GPIO.OUT)
 
 power_a = GPIO.PWM(ena, 100)
-power_a.start(75)
+power_a.start(60)
 
 power_b = GPIO.PWM(enb, 100)
-power_b.start(75)
+power_b.start(60)
 
 TRIG_L = 23
 ECHO_L = 24
@@ -384,43 +386,43 @@ GPIO.output(TRIG_R, GPIO.LOW)
 time.sleep(1)
 
 ser = serial.Serial(
-    port='/dev/serial0',  # Use '/dev/serial0' for GPIO UART
-    baudrate=9600,        # Set baud rate (match it with HC-05 configuration)
-    timeout=1             # Set a timeout for read operations
+    port='/dev/serial0',
+    baudrate=9600,        
+    timeout=1             
 )
 
 def find_distance(trig, echo):
-    start = 0
-    stop = 0
+	start = 0
+	stop = 0
 	
-    GPIO.setup(trig, GPIO.OUT)
-    GPIO.setup(echo, GPIO.IN)
-
-    GPIO.output(trig, GPIO.LOW)
-    time.sleep(0.01)
+	GPIO.setup(trig, GPIO.OUT)
+	GPIO.setup(echo, GPIO.IN)
 	
-    GPIO.output(trig, GPIO.HIGH)
-    time.sleep(0.00001)
-    GPIO.output(trig, GPIO.LOW)
-    begin = time.time()
-    while GPIO.input(echo) == 0 and time.time() < begin + 0.05:
-	start = time.time()
-    while GPIO.input(echo) == 1 and time.time() < begin + 0.1:
-        stop = time.time()
-
-    elapsed = stop - start
-    distance = elapsed * 34300
-    distance = distance / 2
-    distance = round(distance, 2)
+	GPIO.output(trig, GPIO.LOW)
+	time.sleep(0.01)
 	
-    return distance
+	GPIO.output(trig, GPIO.HIGH)
+	time.sleep(0.00001)
+	GPIO.output(trig, GPIO.LOW)
+	begin = time.time()
+	while GPIO.input(echo) == 0 and time.time() < begin + 0.05:
+		start = time.time()
+	while GPIO.input(echo) == 1 and time.time() < begin + 0.1:
+		stop = time.time()
+	
+	elapsed = stop - start
+	distance = elapsed * 34300
+	distance = distance / 2
+	distance = round(distance, 2)
+	
+	return distance
 
 def forward():
-    GPIO.output(in1, GPIO.HIGH)
-    GPIO.output(in2, GPIO.LOW)
+	GPIO.output(in1, GPIO.HIGH)
+	GPIO.output(in2, GPIO.LOW)
 	
-    GPIO.output(in3, GPIO.HIGH)
-    GPIO.output(in4, GPIO.LOW)
+	GPIO.output(in3, GPIO.HIGH)
+	GPIO.output(in4, GPIO.LOW)
 
 def reverse():
     GPIO.output(in1, GPIO.LOW)
@@ -516,8 +518,7 @@ def generate_frames():
         mask = buffer.tobytes()
         yield (b'--mask\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + mask + b'\r\n')    
-               
-        if ser.in_waiting > 0:
+        if ser.in_waiting > 1:
             received_data = ser.read().decode('utf-8') 
         if received_data == "A":
             automatic = True
@@ -525,17 +526,7 @@ def generate_frames():
         elif received_data == "M":
             automatic = False
             #print("Manual")
-            
-        if received_data == "1":
-            power_a.ChangeDutyCycle(50)
-            power_b.ChangeDutyCycle(50)
-        elif received_data == "2":
-            power_a.ChangeDutyCycle(75)
-            power_b.ChangeDutyCycle(75)
-        elif received_data == "3":
-            power_a.ChangeDutyCycle(100)
-            power_b.ChangeDutyCycle(100)
-            
+        
         if automatic:
             if area > 20000:
                 center_x = x + (w)/2
@@ -563,6 +554,7 @@ def generate_frames():
                 stop()
         else:
             received_data = ser.read().decode('utf-8')
+            print(received_data)
             if received_data == "F":
                 print("Foward")
                 forward()
