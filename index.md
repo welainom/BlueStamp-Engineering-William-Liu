@@ -16,8 +16,7 @@ For this modification, I created a web server on my Raspberry Pi using apache2 a
 ![Headstone Image](webservergif.gif)
 
 **How It works:**
-First, I created a web server on my Raspberry Pi using apache2. I could edit the contents of the website on an html file, but not stream video. In order to do so, I used various flask functions to send the video to an html file, which then streamed the video onto the website.
-
+First, I created a web server on my Raspberry Pi using apache2. Apache2 is a commonly used software that allows a Raspberry Pi to serve web pages, and allows users to access them. In order to stream video, I used another python library called flask. Flask is one of the most popular python based web frameworks, and allows users to create lightweight web applications quickly and easily. I used various flask functions to create python code to render an html file that I wrote that takes video from the PiCamera and streams it onto the website.
 ```python
 def generate_frames2():
     while True:
@@ -46,7 +45,7 @@ This code creates a route of the web server, and it calls the generate_frames2 f
 This is part of the html code that takes the video from the python functions. src="{{ url_for('video_feed_stream2') }}" specifies the source of the video, which is what the function video_feed_stream2() returns.
 
 **Challenges:**
-This modification was not an easy one, due to the many parts that were required to make it work. After setting up the web server, I had to learn how to edit the contents using html. After this, I had to use flask, a completely new library to stream the video. After I got this to work, I had to find a way to integrate the movement code into one of the streaming functions. This required a lot of tinkering with the code, which took a while.
+This modification was not an easy one, due to the many parts that were required to make it work. First of all, I had never used html or worked with web servers. After setting up the web server, I had to learn how to edit the contents using html. After this, I had to use flask, a completely new library, to stream the video. After I got this to work, I had to find a way to integrate the movement code into one of the streaming functions. This required a lot of tinkering with the code, which took a while.
 
 # First Modification:
 
