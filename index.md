@@ -1,4 +1,4 @@
-# Ball Tracking Robot:
+	# Ball Tracking Robot:
 
 I chose the Ball Tracking Robot as my main project. It uses a computer vision Python library called OpenCV to detect if the ball is present within the camera frame, and then it controls motors and navigates the robot towards the ball. The robot uses a Raspberry Pi minicomputer, cameras, DC motors, and ultrasonic sensors to detect objects that might cause a crash.
 
@@ -18,9 +18,9 @@ I chose the Ball Tracking Robot as my main project. It uses a computer vision Py
 For this modification, I created a web server on my Raspberry Pi using apache2 and html, and streamed the video captured by the PiCam to the website. 
 
 ![Headstone Image](webservergif.gif)
-![Headstone Image](ball tracking flowchart (1).png)
-![Headstone Image](Blank diagram (1) (1).png)
-![Headstone Image](Blank diagram (2).png)
+![Headstone Image](finalmainflowchart.png)
+![Headstone Image](finalautomatic.png)
+![Headstone Image](finalmanual.png)
 
 **How It works:**
 First, I created a web server on my Raspberry Pi using apache2. Apache2 is a commonly used software that allows a Raspberry Pi to serve web pages, and allows users to access them. In order to stream video, I used another python library called flask. Flask is one of the most popular python based web frameworks, and allows users to create lightweight web applications quickly and easily. I used various flask functions to create python code to render an html file that I wrote that takes video from the PiCamera and streams it onto the website.
