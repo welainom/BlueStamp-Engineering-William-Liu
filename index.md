@@ -19,8 +19,8 @@ For this modification, I created a web server on my Raspberry Pi using apache2 a
 
 ![Headstone Image](webservergif.gif)
 ![Headstone Image](ball tracking flowchart.png)
-![Headstone Image](Blank Diagram (1).png)
-![Headstone Image](Blank Diagram.png)
+![Headstone Image](Blank diagram (1).png)
+![Headstone Image](Blank diagram.png)
 
 **How It works:**
 First, I created a web server on my Raspberry Pi using apache2. Apache2 is a commonly used software that allows a Raspberry Pi to serve web pages, and allows users to access them. In order to stream video, I used another python library called flask. Flask is one of the most popular python based web frameworks, and allows users to create lightweight web applications quickly and easily. I used various flask functions to create python code to render an html file that I wrote that takes video from the PiCamera and streams it onto the website.
