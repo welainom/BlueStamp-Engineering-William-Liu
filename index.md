@@ -94,6 +94,8 @@ This is the final schematic, including the bluetooth modification.
 
 # Third Milestone:
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/nhkigA_j5tA?si=g1DcOc967T06zs54" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
 **Summary:**
 For my third milestone, I completed my project, allowing the robot to infinitely search for the ball.
 
