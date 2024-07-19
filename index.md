@@ -8,6 +8,8 @@ I chose the Ball Tracking Robot as my main project. It uses a computer vision Py
 
 ![Headstone Image](William_L (1).jpg)
 
+<h1>Modifications:</h1>
+
 # Second Modification:
 
 **Summary:** 
