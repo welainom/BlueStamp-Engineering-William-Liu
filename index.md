@@ -10,13 +10,17 @@ I chose the Ball Tracking Robot as my main project. It uses a computer vision Py
 
 <h1>Modifications:</h1>
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/-TdwQXgQ3z4?si=P1H-QrSNylMZWYxk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
 # Second Modification:
 
 **Summary:** 
 For this modification, I created a web server on my Raspberry Pi using apache2 and html, and streamed the video captured by the PiCam to the website. 
 
 ![Headstone Image](webservergif.gif)
-![Headstone Image](flowchart.png)
+![Headstone Image](ball tracking flowchart.png)
+![Headstone Image](Blank Diagram (1).png)
+![Headstone Image](Blank Diagram.png)
 
 **How It works:**
 First, I created a web server on my Raspberry Pi using apache2. Apache2 is a commonly used software that allows a Raspberry Pi to serve web pages, and allows users to access them. In order to stream video, I used another python library called flask. Flask is one of the most popular python based web frameworks, and allows users to create lightweight web applications quickly and easily. I used various flask functions to create python code to render an html file that I wrote that takes video from the PiCamera and streams it onto the website.
